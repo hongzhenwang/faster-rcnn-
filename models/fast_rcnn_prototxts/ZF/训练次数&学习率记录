@@ -1,0 +1,1 @@
+1\用zfmodel初始化fast rcnn网络,20k60k ,lr=0.0001,stepsize=20k,训练到35k提前终止,取30k为final.

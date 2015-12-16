@@ -1,0 +1,2 @@
+1、
+stage1 fast 训练网络的bbox_pred的input dim(84 20) bbox_pred和cls_pred的输出chanel数（84-20 21-5）
