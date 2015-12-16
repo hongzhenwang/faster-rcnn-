@@ -962,8 +962,8 @@ message V1LayerParameter {
     POOLING = 17;
     POWER = 26;
     RELU = 18;
-	RESHAPE = 40;
-	ROIPOOLING = 41;
+    RESHAPE = 40;
+    ROIPOOLING = 41;
     SIGMOID = 19;
     SIGMOID_CROSS_ENTROPY_LOSS = 27;
     SILENCE = 36;

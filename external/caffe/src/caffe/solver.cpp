@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include <caffe/filler.hpp>
+
 #include "caffe/net.hpp"
 #include "caffe/proto/caffe.pb.h"
 #include "caffe/solver.hpp"
@@ -211,6 +213,8 @@ void Solver<Dtype>::Step(int iters) {
       losses[idx] = loss;
     }
     if (display) {
+    	LOG_IF(INFO, 1) << "the std of noise is  "
+    	    	<<this->param_.gradient_noise_param().fill_param().std();
       LOG(INFO) << "Iteration " << iter_ << ", loss = " << smoothed_loss;
       const vector<Blob<Dtype>*>& result = net_->output_blobs();
       int score_index = 0;
@@ -486,9 +490,29 @@ void SGDSolver<Dtype>::ApplyUpdate() {
     LOG(INFO) << "Iteration " << this->iter_ << ", lr = " << rate;
   }
   ClipGradients();
+  //add gradient noise/////
+   //set the std
+     Dtype std_noise = 0;
+     bool is_grad_noise = this->param_.has_gradient_noise_param();
+   	if (is_grad_noise){
+   	  Dtype eta=this->param_.gradient_noise_param().eta();
+   	  Dtype gamma=this->param_.gradient_noise_param().gamma();
+   	  if (eta<0 || gamma<0)
+   		  LOG(FATAL) << "Unknown gradient noise type: ";
+    	  std_noise = eta/(pow((1+this->iter_),gamma));
+   	  this->param_.mutable_gradient_noise_param()->mutable_fill_param()->set_std(std_noise);
+
+     //set the value of grad_noise_(blob)
+   	shared_ptr<Filler<Dtype> > noise_filler(GetFiller<Dtype>(
+   			this->param_.gradient_noise_param().fill_param()));
+   	for (int param_id = 0; param_id < this->net_->params().size();
+   	       ++param_id) {
+   		noise_filler->Fill(history_[param_id].get());//add noise
+   	}
+     } //end
   for (int param_id = 0; param_id < this->net_->params().size(); ++param_id) {
     Normalize(param_id);
-    Regularize(param_id);
+    Regularize(param_id);//add noise w'=w+w'+noise
     ComputeUpdateValue(param_id, rate);
   }
   this->net_->Update();
@@ -528,6 +552,8 @@ void SGDSolver<Dtype>::Regularize(int param_id) {
   Dtype weight_decay = this->param_.weight_decay();
   string regularization_type = this->param_.regularization_type();
   Dtype local_decay = weight_decay * net_params_weight_decay[param_id];
+  bool is_grad_noise = this->param_.has_gradient_noise_param();
+  Dtype alpha=1;
   switch (Caffe::mode()) {
   case Caffe::CPU: {
     if (local_decay) {
@@ -537,6 +563,11 @@ void SGDSolver<Dtype>::Regularize(int param_id) {
             local_decay,
             net_params[param_id]->cpu_data(),
             net_params[param_id]->mutable_cpu_diff());
+        if (is_grad_noise==1){
+        caffe_axpy(net_params[param_id]->count(),
+                		alpha,
+        					grad_noise_[param_id]->cpu_data(),
+                            net_params[param_id]->mutable_cpu_diff());}
       } else if (regularization_type == "L1") {
         caffe_cpu_sign(net_params[param_id]->count(),
             net_params[param_id]->cpu_data(),
@@ -560,6 +591,11 @@ void SGDSolver<Dtype>::Regularize(int param_id) {
             local_decay,
             net_params[param_id]->gpu_data(),
             net_params[param_id]->mutable_gpu_diff());
+        if (is_grad_noise==1){
+        	caffe_gpu_axpy(net_params[param_id]->count(),
+        	        		alpha,
+        						grad_noise_[param_id]->gpu_data(),
+        	                    net_params[param_id]->mutable_gpu_diff());}
       } else if (regularization_type == "L1") {
         caffe_gpu_sign(net_params[param_id]->count(),
             net_params[param_id]->gpu_data(),

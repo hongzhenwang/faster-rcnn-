@@ -11,4 +11,13 @@ weight_decay: 0.0005
 # We disable standard caffe solver snapshotting and implement our own snapshot
 snapshot: 0
 #debug_info: true
+gradient_noise_param {
+  eta: 0.01;
+  gamma: 0.55;
+ fill_param{
+  type: "gaussian";
+  mean: 0;
+  std: 0;
+  }
+s}
 

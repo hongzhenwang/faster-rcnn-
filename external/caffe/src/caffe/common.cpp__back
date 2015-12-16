@@ -139,6 +139,7 @@ void Caffe::SetDevice(const int device_id) {
   int current_device;
   CUDA_CHECK(cudaGetDevice(&current_device));
   if (current_device == device_id) {
+    LOG(INFO) << "Device is already set;
     return;
   }
   // The call to cudaSetDevice must come before any calls to Get, which
