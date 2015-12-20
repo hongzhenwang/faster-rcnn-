@@ -213,7 +213,7 @@ void Solver<Dtype>::Step(int iters) {
       losses[idx] = loss;
     }
     if (display) {
-    	LOG_IF(INFO, 1) << "the std of noise is  "
+    	LOG(INFO) << "the std of noise is  "
     	    	<<this->param_.gradient_noise_param().fill_param().std();
       LOG(INFO) << "Iteration " << iter_ << ", loss = " << smoothed_loss;
       const vector<Blob<Dtype>*>& result = net_->output_blobs();
@@ -450,11 +450,13 @@ void SGDSolver<Dtype>::PreSolve() {
   history_.clear();
   update_.clear();
   temp_.clear();
+  grad_noise_.clear();
   for (int i = 0; i < net_params.size(); ++i) {
     const vector<int>& shape = net_params[i]->shape();
     history_.push_back(shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
     update_.push_back(shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
     temp_.push_back(shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
+    grad_noise_.push_back(shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
   }
 }
 
@@ -494,7 +496,7 @@ void SGDSolver<Dtype>::ApplyUpdate() {
    //set the std
      Dtype std_noise = 0;
      bool is_grad_noise = this->param_.has_gradient_noise_param();
-   	if (is_grad_noise){
+   	 if (is_grad_noise){
    	  Dtype eta=this->param_.gradient_noise_param().eta();
    	  Dtype gamma=this->param_.gradient_noise_param().gamma();
    	  if (eta<0 || gamma<0)
@@ -502,14 +504,19 @@ void SGDSolver<Dtype>::ApplyUpdate() {
     	  std_noise = eta/(pow((1+this->iter_),gamma));
    	  this->param_.mutable_gradient_noise_param()->mutable_fill_param()->set_std(std_noise);
 
+   	  //LOG(INFO) << "params().size() is  " << this->net_->params().size();
+   	  //LOG(INFO) << "grad_noise_.size() is  " << grad_noise_.size();
+
      //set the value of grad_noise_(blob)
    	shared_ptr<Filler<Dtype> > noise_filler(GetFiller<Dtype>(
    			this->param_.gradient_noise_param().fill_param()));
-   	for (int param_id = 0; param_id < this->net_->params().size();
-   	       ++param_id) {
-   		noise_filler->Fill(history_[param_id].get());//add noise
+   	//LOG(INFO) << "start add noise  " ;
+   	for (int param_id = 0; param_id < this->net_->params().size(); ++param_id) {
+   		noise_filler->Fill(grad_noise_[param_id].get());//add noise
+   		//LOG(INFO) << " add noise number " << param_id;
    	}
      } //end
+
   for (int param_id = 0; param_id < this->net_->params().size(); ++param_id) {
     Normalize(param_id);
     Regularize(param_id);//add noise w'=w+w'+noise

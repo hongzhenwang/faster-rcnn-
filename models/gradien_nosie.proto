@@ -1,0 +1,9 @@
+gradient_noise_param {
+  eta: 0.01;
+  gamma: 0.55;
+ fill_param{
+  type: "gaussian";
+  mean: 0;
+  std: 0;
+  }
+}
