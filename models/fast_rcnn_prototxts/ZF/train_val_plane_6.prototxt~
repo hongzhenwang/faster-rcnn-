@@ -346,7 +346,7 @@ layer {
 	}
 	type: "InnerProduct"
 	inner_product_param {
-		num_output: 5
+		num_output: 7
 		weight_filler {
 			type: "gaussian"
 			std: 0.01

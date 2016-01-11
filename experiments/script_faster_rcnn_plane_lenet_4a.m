@@ -1,5 +1,4 @@
-
-function script_faster_rcnn_plane_ZF_con3_ori()
+function script_faster_rcnn_plane_lenet_4a()
 % script_faster_rcnn_VOC2007_ZF()
 % Faster rcnn training and testing with Zeiler & Fergus model
 % --------------------------------------------------------
@@ -16,17 +15,14 @@ run(fullfile(fileparts(fileparts(mfilename('fullpath'))), 'startup'));
 opts.caffe_version          = 'caffe_faster_rcnn';
 opts.caffe_version          = '+caffe';
 opts.gpu_id                 = auto_select_gpu;
-%         caffe_log_file_base = fullfile(pwd, 'caffe_plane_log');
-%         caffe.init_log(caffe_log_file_base);
 active_caffe_mex(opts.gpu_id, opts.caffe_version);
-
 
 % do validation, or not 
 opts.do_val                 = true; 
 % model
-model                       = Model.ZF_for_Faster_RCNN_plane_con3_ori;
+model                       = Model.lenet_4a_for_Faster_RCNN_plane;
 % cache base
-cache_base_proposal         = 'faster_plane_ZF_ChangeAnchor_con3';
+cache_base_proposal         = 'plane_lenet';
 cache_base_fast_rcnn        = '';
 % train/test datae
 dataset                     = [];
@@ -40,7 +36,6 @@ dataset                     = Dataset.plane_test(dataset, 'test', false);
 % conf
 conf_proposal               = proposal_config('image_means', model.mean_image, 'feat_stride', model.feat_stride);
 conf_fast_rcnn              = fast_rcnn_config('image_means', model.mean_image);
-conf_ori                       = ori_config('image_means', model.mean_image);
 % set cache folder for each stage
 model                       = Faster_RCNN_Train.set_cache_folder(cache_base_proposal, cache_base_fast_rcnn, model);
 % generate anchors and pre-calculate output size of rpn network 
@@ -54,7 +49,7 @@ anchors_plane.output_height_map=conf_proposal.output_height_map;
 save('anchors_plane.mat','anchors_plane','-v7.3')
 end
 %%  stage one proposal
-fprintf('\n***************\nstage one proposal \n***************\n')
+fprintf('\n***************\nstage one proposal \n***************\n');
 % train
 model.stage1_rpn            = Faster_RCNN_Train.do_proposal_train(conf_proposal, dataset, model.stage1_rpn, opts.do_val);
 % test
@@ -68,11 +63,11 @@ catch
     save('roi_new_plane.mat','roi_new_plane','-V7.3')    
 end
 %%  stage one fast rcnn
-fprintf('\n***************\nstage one fast rcnn\n***************\ n');
+fprintf('\n***************\nstage one fast rcnn\n***************\n');
 % train
 model.stage1_fast_rcnn      = Faster_RCNN_Train.do_fast_rcnn_train(conf_fast_rcnn, dataset, model.stage1_fast_rcnn, opts.do_val);
 % test
-% opts.mAP                    = Faster_RCNN_Train.do_fast_rcnn_test(conf_fast_rcnn, model.stage1_fast_rcnn, dataset.imdb_test, dataset.roidb_test);
+opts.mAP                    = Faster_RCNN_Train.do_fast_rcnn_test(conf_fast_rcnn, model.stage1_fast_rcnn, dataset.imdb_test, dataset.roidb_test);
 
 %%  stage two proposal
 % net proposal
@@ -81,28 +76,14 @@ fprintf('\n***************\nstage two proposal\n***************\n');
 model.stage2_rpn.init_net_file = model.stage1_fast_rcnn.output_model_file;
 model.stage2_rpn            = Faster_RCNN_Train.do_proposal_train(conf_proposal, dataset, model.stage2_rpn, opts.do_val);
 % test
-try load('roi_new_plane_stage2.mat');dataset.roidb_train= roi_new_plane_stage2.train;dataset.roidb_test= roi_new_plane_stage2.test;
-catch
-    dataset.roidb_train       	= cellfun(@(x, y) Faster_RCNN_Train.do_proposal_test(conf_proposal, model.stage2_rpn, x, y), dataset.imdb_train, dataset.roidb_train, 'UniformOutput', false);
-    dataset.roidb_test       	= Faster_RCNN_Train.do_proposal_test(conf_proposal, model.stage2_rpn, dataset.imdb_test, dataset.roidb_test);
-    roi_new_plane_stage2.train=dataset.roidb_train ;v       
-    roi_new_plane_stage2.test=dataset.roidb_test;
-    save('roi_new_plane_stage2.mat','roi_new_plane_stage2','-V7.3')    
-end
-% % dataset.roidb_train       	= cellfun(@(x, y) Faster_RCNN_Train.do_proposal_test(conf_proposal, model.stage2_rpn, x, y), dataset.imdb_train, dataset.roidb_train, 'UniformOutput', false);
-% % dataset.roidb_test       	= Faster_RCNN_Train.do_proposal_test(conf_proposal, model.stage2_rpn, dataset.imdb_test, dataset.roidb_test);
+dataset.roidb_train       	= cellfun(@(x, y) Faster_RCNN_Train.do_proposal_test(conf_proposal, model.stage2_rpn, x, y), dataset.imdb_train, dataset.roidb_train, 'UniformOutput', false);
+dataset.roidb_test       	= Faster_RCNN_Train.do_proposal_test(conf_proposal, model.stage2_rpn, dataset.imdb_test, dataset.roidb_test);
 
 %%  stage two fast rcnn
 fprintf('\n***************\nstage two fast rcnn\n***************\n');
 % train
 model.stage2_fast_rcnn.init_net_file = model.stage1_fast_rcnn.output_model_file;
 model.stage2_fast_rcnn      = Faster_RCNN_Train.do_fast_rcnn_train(conf_fast_rcnn, dataset, model.stage2_fast_rcnn, opts.do_val);
-
-%%  stage ori
-fprintf('\n***************\nstage ori\n***************\n');
-% train
-model.stage_ori.init_net_file = model.stage2_fast_rcnn.output_model_file;
-model.stage_ori      = Faster_RCNN_Train.do_ori_train(conf_ori, dataset, model.stage_ori, opts.do_val);
 
 %% final test
 fprintf('\n***************\nfinal test\n***************\n');
