@@ -1,10 +1,16 @@
-name: "Zeiler_conv5"
+name: "lenet_4a"
 
 input: "data"
 input_dim: 1
 input_dim: 3
 input_dim: 224
 input_dim: 224
+
+input: "rois"
+input_dim: 1 # to be changed on-the-fly to num ROIs
+input_dim: 5 # [batch ind, x1, y1, x2, y2] zero-based indexing
+input_dim: 1
+input_dim: 1
 
 # ------------------------ layer 1 -----------------------------
 layer {
@@ -787,6 +793,7 @@ layer {
 }
 
 #-----------------------layer +-------------------------
+#-----------------------layer +-------------------------
 layer {
    name: "conv_fast_plane"
    type: "Convolution"
@@ -800,11 +807,11 @@ layer {
 	}
    convolution_param{
 	   num_output: 256
-	   kernel_size: 3
-	   pad: 1
+	   kernel_size: 1
+	   pad: 0
 	   stride: 1
 	   weight_filler {
-		 type: "gaussian"
+		 type: "xavier"
 		 std: 0.01
 	   }
 	   bias_filler {

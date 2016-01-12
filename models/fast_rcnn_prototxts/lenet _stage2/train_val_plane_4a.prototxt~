@@ -6,29 +6,30 @@ input_dim: 3
 input_dim: 224
 input_dim: 224
 
-input: "labels"
-input_dim: 1 		# to be changed on-the-fly to match input dim
-input_dim: 9        # 9(anchors)        
-input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
-input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
+input: "rois"
+input_dim: 1 # to be changed on-the-fly to num ROIs
+input_dim: 5 # [batch ind, x1, y1, x2, y2] zero-based indexing
+input_dim: 1
+input_dim: 1
 
-input: "labels_weights"
-input_dim: 1 		# to be changed on-the-fly to match input dim
-input_dim: 9        # 9(anchors)        
-input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
-input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
+input: "labels"
+input_dim: 1 # to be changed on-the-fly to match num ROIs
+input_dim: 1
+input_dim: 1
+input_dim: 1
 
 input: "bbox_targets"
-input_dim: 1  		# to be changed on-the-fly to match input dim
-input_dim: 36  		# 4 * 9(anchors) 
-input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
-input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
+input_dim: 1  # to be changed on-the-fly to match num ROIs
+input_dim: 28 # 4 * (K+1) (=21) classes
+input_dim: 1
+input_dim: 1
 
 input: "bbox_loss_weights"
-input_dim: 1  		# to be changed on-the-fly to match input dim
-input_dim: 36  		# 4 * 9(anchors) 
-input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
-input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
+input_dim: 1  # to be changed on-the-fly to match num ROIs
+input_dim: 28 # 4 * (K+1) (=21) classes
+input_dim: 1
+input_dim: 1
+
 
 layer {
   name: "conv1/7x7_s2"
@@ -822,11 +823,11 @@ layer {
 	}
    convolution_param{
 	   num_output: 256
-	   kernel_size: 3
-	   pad: 1
+	   kernel_size: 1
+	   pad: 0
 	   stride: 1
 	   weight_filler {
-		 type: "gaussian"
+		 type: "xavier"
 		 std: 0.01
 	   }
 	   bias_filler {

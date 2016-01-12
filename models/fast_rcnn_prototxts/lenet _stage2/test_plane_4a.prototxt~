@@ -1,10 +1,16 @@
-name: "Zeiler_conv5"
+name: "lenet_4a"
 
 input: "data"
 input_dim: 1
 input_dim: 3
 input_dim: 224
 input_dim: 224
+
+input: "rois"
+input_dim: 1 # to be changed on-the-fly to num ROIs
+input_dim: 5 # [batch ind, x1, y1, x2, y2] zero-based indexing
+input_dim: 1
+input_dim: 1
 
 # ------------------------ layer 1 -----------------------------
 layer {
