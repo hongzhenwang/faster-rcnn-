@@ -1,0 +1,373 @@
+Log file created at: 2016/01/12 16:16:41
+Running on machine: whz-ubuntu
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0112 16:16:41.361596  5505 net.cpp:42] Initializing net from parameters: 
+name: "lenet_4a"
+input: "data"
+input: "rois"
+input_dim: 1
+input_dim: 512
+input_dim: 50
+input_dim: 50
+input_dim: 1
+input_dim: 5
+input_dim: 1
+input_dim: 1
+state {
+  phase: TEST
+}
+layer {
+  name: "conv_fast_plane"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv_fast"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 256
+    pad: 0
+    kernel_size: 1
+    stride: 1
+    weight_filler {
+      type: "xavier"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "relu_conv_fast"
+  type: "ReLU"
+  bottom: "conv_fast"
+  top: "conv_fast"
+}
+layer {
+  name: "roi_pool5"
+  type: "ROIPooling"
+  bottom: "conv_fast"
+  bottom: "rois"
+  top: "pool5"
+  roi_pooling_param {
+    pooled_h: 6
+    pooled_w: 6
+    spatial_scale: 0.0625
+  }
+}
+layer {
+  name: "fc6"
+  type: "InnerProduct"
+  bottom: "pool5"
+  top: "fc6"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  inner_product_param {
+    num_output: 4096
+  }
+}
+layer {
+  name: "relu6"
+  type: "ReLU"
+  bottom: "fc6"
+  top: "fc6"
+}
+layer {
+  name: "drop6"
+  type: "Dropout"
+  bottom: "fc6"
+  top: "fc6"
+  dropout_param {
+    dropout_ratio: 0.5
+    scale_train: false
+  }
+}
+layer {
+  name: "fc7"
+  type: "InnerProduct"
+  bottom: "fc6"
+  top: "fc7"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  inner_product_param {
+    num_output: 4096
+  }
+}
+layer {
+  name: "relu7"
+  type: "ReLU"
+  bottom: "fc7"
+  top: "fc7"
+}
+layer {
+  name: "drop7"
+  type: "Dropout"
+  bottom: "fc7"
+  top: "fc7"
+  dropout_param {
+    dropout_ratio: 0.5
+    scale_train: false
+  }
+}
+layer {
+  name: "cls_score"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "cls_score"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  inner_product_param {
+    num_output: 7
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "bbox_pred"
+  type: "InnerProduct"
+  bottom: "fc7"
+  top: "bbox_pred"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  inner_product_param {
+    num_output: 28
+    weight_filler {
+      type: "gaussian"
+      std: 0.001
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layer {
+  name: "cls_prob"
+  type: "Softmax"
+  bottom: "cls_score"
+  top: "cls_prob"
+  loss_weight: 1
+}
+I0112 16:16:41.361765  5505 net.cpp:380] Input 0 -> data
+I0112 16:16:41.361793  5505 net.cpp:380] Input 1 -> rois
+I0112 16:16:41.361799  5505 net.cpp:67] Memory required for data: 0
+I0112 16:16:41.361814  5505 layer_factory.hpp:74] Creating layer conv_fast_plane
+I0112 16:16:41.361822  5505 net.cpp:90] Creating Layer conv_fast_plane
+I0112 16:16:41.361824  5505 net.cpp:420] conv_fast_plane <- data
+I0112 16:16:41.361830  5505 net.cpp:378] conv_fast_plane -> conv_fast
+I0112 16:16:41.361836  5505 net.cpp:120] Setting up conv_fast_plane
+I0112 16:16:41.368005  5505 net.cpp:127] Top shape: 1 256 50 50 (640000)
+I0112 16:16:41.368015  5505 net.cpp:133] Memory required for data: 2560000
+I0112 16:16:41.368026  5505 layer_factory.hpp:74] Creating layer relu_conv_fast
+I0112 16:16:41.368036  5505 net.cpp:90] Creating Layer relu_conv_fast
+I0112 16:16:41.368039  5505 net.cpp:420] relu_conv_fast <- conv_fast
+I0112 16:16:41.368046  5505 net.cpp:367] relu_conv_fast -> conv_fast (in-place)
+I0112 16:16:41.368052  5505 net.cpp:120] Setting up relu_conv_fast
+I0112 16:16:41.368227  5505 net.cpp:127] Top shape: 1 256 50 50 (640000)
+I0112 16:16:41.368232  5505 net.cpp:133] Memory required for data: 5120000
+I0112 16:16:41.368234  5505 layer_factory.hpp:74] Creating layer roi_pool5
+I0112 16:16:41.368242  5505 net.cpp:90] Creating Layer roi_pool5
+I0112 16:16:41.368244  5505 net.cpp:420] roi_pool5 <- conv_fast
+I0112 16:16:41.368248  5505 net.cpp:420] roi_pool5 <- rois
+I0112 16:16:41.368253  5505 net.cpp:378] roi_pool5 -> pool5
+I0112 16:16:41.368258  5505 net.cpp:120] Setting up roi_pool5
+I0112 16:16:41.368260  5505 roi_pooling_layer.cpp:44] Spatial scale: 0.0625
+I0112 16:16:41.368278  5505 net.cpp:127] Top shape: 1 256 6 6 (9216)
+I0112 16:16:41.368279  5505 net.cpp:133] Memory required for data: 5156864
+I0112 16:16:41.368281  5505 layer_factory.hpp:74] Creating layer fc6
+I0112 16:16:41.368288  5505 net.cpp:90] Creating Layer fc6
+I0112 16:16:41.368289  5505 net.cpp:420] fc6 <- pool5
+I0112 16:16:41.368294  5505 net.cpp:378] fc6 -> fc6
+I0112 16:16:41.368300  5505 net.cpp:120] Setting up fc6
+I0112 16:16:41.434978  5505 net.cpp:127] Top shape: 1 4096 (4096)
+I0112 16:16:41.434989  5505 net.cpp:133] Memory required for data: 5173248
+I0112 16:16:41.435009  5505 layer_factory.hpp:74] Creating layer relu6
+I0112 16:16:41.435021  5505 net.cpp:90] Creating Layer relu6
+I0112 16:16:41.435024  5505 net.cpp:420] relu6 <- fc6
+I0112 16:16:41.435032  5505 net.cpp:367] relu6 -> fc6 (in-place)
+I0112 16:16:41.435037  5505 net.cpp:120] Setting up relu6
+I0112 16:16:41.435230  5505 net.cpp:127] Top shape: 1 4096 (4096)
+I0112 16:16:41.435233  5505 net.cpp:133] Memory required for data: 5189632
+I0112 16:16:41.435236  5505 layer_factory.hpp:74] Creating layer drop6
+I0112 16:16:41.435242  5505 net.cpp:90] Creating Layer drop6
+I0112 16:16:41.435245  5505 net.cpp:420] drop6 <- fc6
+I0112 16:16:41.435248  5505 net.cpp:367] drop6 -> fc6 (in-place)
+I0112 16:16:41.435252  5505 net.cpp:120] Setting up drop6
+I0112 16:16:41.435258  5505 net.cpp:127] Top shape: 1 4096 (4096)
+I0112 16:16:41.435259  5505 net.cpp:133] Memory required for data: 5206016
+I0112 16:16:41.435261  5505 layer_factory.hpp:74] Creating layer fc7
+I0112 16:16:41.435267  5505 net.cpp:90] Creating Layer fc7
+I0112 16:16:41.435269  5505 net.cpp:420] fc7 <- fc6
+I0112 16:16:41.435274  5505 net.cpp:378] fc7 -> fc7
+I0112 16:16:41.435281  5505 net.cpp:120] Setting up fc7
+I0112 16:16:41.466372  5505 net.cpp:127] Top shape: 1 4096 (4096)
+I0112 16:16:41.466384  5505 net.cpp:133] Memory required for data: 5222400
+I0112 16:16:41.466398  5505 layer_factory.hpp:74] Creating layer relu7
+I0112 16:16:41.466408  5505 net.cpp:90] Creating Layer relu7
+I0112 16:16:41.466411  5505 net.cpp:420] relu7 <- fc7
+I0112 16:16:41.466418  5505 net.cpp:367] relu7 -> fc7 (in-place)
+I0112 16:16:41.466423  5505 net.cpp:120] Setting up relu7
+I0112 16:16:41.466753  5505 net.cpp:127] Top shape: 1 4096 (4096)
+I0112 16:16:41.466758  5505 net.cpp:133] Memory required for data: 5238784
+I0112 16:16:41.466759  5505 layer_factory.hpp:74] Creating layer drop7
+I0112 16:16:41.466769  5505 net.cpp:90] Creating Layer drop7
+I0112 16:16:41.466800  5505 net.cpp:420] drop7 <- fc7
+I0112 16:16:41.466806  5505 net.cpp:367] drop7 -> fc7 (in-place)
+I0112 16:16:41.466810  5505 net.cpp:120] Setting up drop7
+I0112 16:16:41.466816  5505 net.cpp:127] Top shape: 1 4096 (4096)
+I0112 16:16:41.466819  5505 net.cpp:133] Memory required for data: 5255168
+I0112 16:16:41.466820  5505 layer_factory.hpp:74] Creating layer fc7_drop7_0_split
+I0112 16:16:41.466825  5505 net.cpp:90] Creating Layer fc7_drop7_0_split
+I0112 16:16:41.466826  5505 net.cpp:420] fc7_drop7_0_split <- fc7
+I0112 16:16:41.466832  5505 net.cpp:378] fc7_drop7_0_split -> fc7_drop7_0_split_0
+I0112 16:16:41.466837  5505 net.cpp:378] fc7_drop7_0_split -> fc7_drop7_0_split_1
+I0112 16:16:41.466841  5505 net.cpp:120] Setting up fc7_drop7_0_split
+I0112 16:16:41.466847  5505 net.cpp:127] Top shape: 1 4096 (4096)
+I0112 16:16:41.466850  5505 net.cpp:127] Top shape: 1 4096 (4096)
+I0112 16:16:41.466850  5505 net.cpp:133] Memory required for data: 5287936
+I0112 16:16:41.466852  5505 layer_factory.hpp:74] Creating layer cls_score
+I0112 16:16:41.466861  5505 net.cpp:90] Creating Layer cls_score
+I0112 16:16:41.466862  5505 net.cpp:420] cls_score <- fc7_drop7_0_split_0
+I0112 16:16:41.466868  5505 net.cpp:378] cls_score -> cls_score
+I0112 16:16:41.466874  5505 net.cpp:120] Setting up cls_score
+I0112 16:16:41.468778  5505 net.cpp:127] Top shape: 1 7 (7)
+I0112 16:16:41.468781  5505 net.cpp:133] Memory required for data: 5287964
+I0112 16:16:41.468786  5505 layer_factory.hpp:74] Creating layer bbox_pred
+I0112 16:16:41.468791  5505 net.cpp:90] Creating Layer bbox_pred
+I0112 16:16:41.468793  5505 net.cpp:420] bbox_pred <- fc7_drop7_0_split_1
+I0112 16:16:41.468799  5505 net.cpp:378] bbox_pred -> bbox_pred
+I0112 16:16:41.468803  5505 net.cpp:120] Setting up bbox_pred
+I0112 16:16:41.476189  5505 net.cpp:127] Top shape: 1 28 (28)
+I0112 16:16:41.476192  5505 net.cpp:133] Memory required for data: 5288076
+I0112 16:16:41.476198  5505 layer_factory.hpp:74] Creating layer cls_prob
+I0112 16:16:41.476205  5505 net.cpp:90] Creating Layer cls_prob
+I0112 16:16:41.476207  5505 net.cpp:420] cls_prob <- cls_score
+I0112 16:16:41.476212  5505 net.cpp:378] cls_prob -> cls_prob
+I0112 16:16:41.476215  5505 net.cpp:120] Setting up cls_prob
+I0112 16:16:41.476330  5505 net.cpp:127] Top shape: 1 7 (7)
+I0112 16:16:41.476333  5505 net.cpp:129]     with loss weight 1
+I0112 16:16:41.476341  5505 net.cpp:133] Memory required for data: 5288104
+I0112 16:16:41.476343  5505 net.cpp:192] cls_prob needs backward computation.
+I0112 16:16:41.476346  5505 net.cpp:194] bbox_pred does not need backward computation.
+I0112 16:16:41.476348  5505 net.cpp:192] cls_score needs backward computation.
+I0112 16:16:41.476351  5505 net.cpp:192] fc7_drop7_0_split needs backward computation.
+I0112 16:16:41.476352  5505 net.cpp:192] drop7 needs backward computation.
+I0112 16:16:41.476353  5505 net.cpp:192] relu7 needs backward computation.
+I0112 16:16:41.476356  5505 net.cpp:192] fc7 needs backward computation.
+I0112 16:16:41.476357  5505 net.cpp:192] drop6 needs backward computation.
+I0112 16:16:41.476359  5505 net.cpp:192] relu6 needs backward computation.
+I0112 16:16:41.476361  5505 net.cpp:192] fc6 needs backward computation.
+I0112 16:16:41.476363  5505 net.cpp:192] roi_pool5 needs backward computation.
+I0112 16:16:41.476366  5505 net.cpp:192] relu_conv_fast needs backward computation.
+I0112 16:16:41.476367  5505 net.cpp:192] conv_fast_plane needs backward computation.
+I0112 16:16:41.476369  5505 net.cpp:235] This network produces output bbox_pred
+I0112 16:16:41.476372  5505 net.cpp:235] This network produces output cls_prob
+I0112 16:16:41.476383  5505 net.cpp:492] Collecting Learning Rate and Weight Decay.
+I0112 16:16:41.476388  5505 net.cpp:247] Network initialization done.
+I0112 16:16:41.476389  5505 net.cpp:248] Memory required for data: 5288104
+I0112 16:16:42.859841  5505 net.cpp:743] Ignoring source layer labels_input_2_split
+I0112 16:16:42.859860  5505 net.cpp:743] Ignoring source layer ori_labels_input_3_split
+I0112 16:16:42.859863  5505 net.cpp:743] Ignoring source layer conv1/7x7_s2
+I0112 16:16:42.859886  5505 net.cpp:743] Ignoring source layer conv1/relu_7x7
+I0112 16:16:42.859889  5505 net.cpp:743] Ignoring source layer pool1/3x3_s2
+I0112 16:16:42.859890  5505 net.cpp:743] Ignoring source layer pool1/norm1
+I0112 16:16:42.859892  5505 net.cpp:743] Ignoring source layer conv2/3x3_reduce
+I0112 16:16:42.859894  5505 net.cpp:743] Ignoring source layer conv2/relu_3x3_reduce
+I0112 16:16:42.859895  5505 net.cpp:743] Ignoring source layer conv2/3x3
+I0112 16:16:42.859897  5505 net.cpp:743] Ignoring source layer conv2/relu_3x3
+I0112 16:16:42.859899  5505 net.cpp:743] Ignoring source layer conv2/norm2
+I0112 16:16:42.859900  5505 net.cpp:743] Ignoring source layer pool2/3x3_s2
+I0112 16:16:42.859902  5505 net.cpp:743] Ignoring source layer pool2/3x3_s2_pool2/3x3_s2_0_split
+I0112 16:16:42.859904  5505 net.cpp:743] Ignoring source layer inception_3a/1x1
+I0112 16:16:42.859905  5505 net.cpp:743] Ignoring source layer inception_3a/relu_1x1
+I0112 16:16:42.859907  5505 net.cpp:743] Ignoring source layer inception_3a/3x3_reduce
+I0112 16:16:42.859908  5505 net.cpp:743] Ignoring source layer inception_3a/relu_3x3_reduce
+I0112 16:16:42.859910  5505 net.cpp:743] Ignoring source layer inception_3a/3x3
+I0112 16:16:42.859911  5505 net.cpp:743] Ignoring source layer inception_3a/relu_3x3
+I0112 16:16:42.859913  5505 net.cpp:743] Ignoring source layer inception_3a/5x5_reduce
+I0112 16:16:42.859915  5505 net.cpp:743] Ignoring source layer inception_3a/relu_5x5_reduce
+I0112 16:16:42.859916  5505 net.cpp:743] Ignoring source layer inception_3a/5x5
+I0112 16:16:42.859918  5505 net.cpp:743] Ignoring source layer inception_3a/relu_5x5
+I0112 16:16:42.859920  5505 net.cpp:743] Ignoring source layer inception_3a/pool
+I0112 16:16:42.859921  5505 net.cpp:743] Ignoring source layer inception_3a/pool_proj
+I0112 16:16:42.859922  5505 net.cpp:743] Ignoring source layer inception_3a/relu_pool_proj
+I0112 16:16:42.859925  5505 net.cpp:743] Ignoring source layer inception_3a/output
+I0112 16:16:42.859925  5505 net.cpp:743] Ignoring source layer inception_3a/output_inception_3a/output_0_split
+I0112 16:16:42.859927  5505 net.cpp:743] Ignoring source layer inception_3b/1x1
+I0112 16:16:42.859930  5505 net.cpp:743] Ignoring source layer inception_3b/relu_1x1
+I0112 16:16:42.859930  5505 net.cpp:743] Ignoring source layer inception_3b/3x3_reduce
+I0112 16:16:42.859932  5505 net.cpp:743] Ignoring source layer inception_3b/relu_3x3_reduce
+I0112 16:16:42.859933  5505 net.cpp:743] Ignoring source layer inception_3b/3x3
+I0112 16:16:42.859935  5505 net.cpp:743] Ignoring source layer inception_3b/relu_3x3
+I0112 16:16:42.859936  5505 net.cpp:743] Ignoring source layer inception_3b/5x5_reduce
+I0112 16:16:42.859938  5505 net.cpp:743] Ignoring source layer inception_3b/relu_5x5_reduce
+I0112 16:16:42.859940  5505 net.cpp:743] Ignoring source layer inception_3b/5x5
+I0112 16:16:42.859941  5505 net.cpp:743] Ignoring source layer inception_3b/relu_5x5
+I0112 16:16:42.859942  5505 net.cpp:743] Ignoring source layer inception_3b/pool
+I0112 16:16:42.859944  5505 net.cpp:743] Ignoring source layer inception_3b/pool_proj
+I0112 16:16:42.859946  5505 net.cpp:743] Ignoring source layer inception_3b/relu_pool_proj
+I0112 16:16:42.859947  5505 net.cpp:743] Ignoring source layer inception_3b/output
+I0112 16:16:42.859949  5505 net.cpp:743] Ignoring source layer pool3/3x3_s2
+I0112 16:16:42.859951  5505 net.cpp:743] Ignoring source layer pool3/3x3_s2_pool3/3x3_s2_0_split
+I0112 16:16:42.859952  5505 net.cpp:743] Ignoring source layer inception_4a/1x1
+I0112 16:16:42.859953  5505 net.cpp:743] Ignoring source layer inception_4a/relu_1x1
+I0112 16:16:42.859956  5505 net.cpp:743] Ignoring source layer inception_4a/3x3_reduce
+I0112 16:16:42.859956  5505 net.cpp:743] Ignoring source layer inception_4a/relu_3x3_reduce
+I0112 16:16:42.859958  5505 net.cpp:743] Ignoring source layer inception_4a/3x3
+I0112 16:16:42.859959  5505 net.cpp:743] Ignoring source layer inception_4a/relu_3x3
+I0112 16:16:42.859961  5505 net.cpp:743] Ignoring source layer inception_4a/5x5_reduce
+I0112 16:16:42.859966  5505 net.cpp:743] Ignoring source layer inception_4a/relu_5x5_reduce
+I0112 16:16:42.859968  5505 net.cpp:743] Ignoring source layer inception_4a/5x5
+I0112 16:16:42.859969  5505 net.cpp:743] Ignoring source layer inception_4a/relu_5x5
+I0112 16:16:42.859972  5505 net.cpp:743] Ignoring source layer inception_4a/pool
+I0112 16:16:42.859973  5505 net.cpp:743] Ignoring source layer inception_4a/pool_proj
+I0112 16:16:42.859974  5505 net.cpp:743] Ignoring source layer inception_4a/relu_pool_proj
+I0112 16:16:42.859977  5505 net.cpp:743] Ignoring source layer inception_4a/output
+I0112 16:16:42.859977  5505 net.cpp:746] Copying source layer conv_fast_plane
+I0112 16:16:42.860893  5505 net.cpp:746] Copying source layer relu_conv_fast
+I0112 16:16:42.860894  5505 net.cpp:746] Copying source layer roi_pool5
+I0112 16:16:42.860895  5505 net.cpp:746] Copying source layer fc6
+I0112 16:16:43.125284  5505 net.cpp:746] Copying source layer relu6
+I0112 16:16:43.125300  5505 net.cpp:746] Copying source layer drop6
+I0112 16:16:43.125303  5505 net.cpp:746] Copying source layer fc7
+I0112 16:16:43.242622  5505 net.cpp:746] Copying source layer relu7
+I0112 16:16:43.242636  5505 net.cpp:746] Copying source layer drop7
+I0112 16:16:43.242638  5505 net.cpp:746] Copying source layer fc7_drop7_0_split
+I0112 16:16:43.242640  5505 net.cpp:746] Copying source layer cls_score
+I0112 16:16:43.242867  5505 net.cpp:743] Ignoring source layer cls_score_cls_score_0_split
+I0112 16:16:43.242869  5505 net.cpp:746] Copying source layer bbox_pred
+I0112 16:16:43.243676  5505 net.cpp:743] Ignoring source layer loss
+I0112 16:16:43.243680  5505 net.cpp:743] Ignoring source layer accuarcy
+I0112 16:16:43.243680  5505 net.cpp:743] Ignoring source layer loss_bbox
+I0112 16:16:43.243682  5505 net.cpp:743] Ignoring source layer ori_score
+I0112 16:16:43.243685  5505 net.cpp:743] Ignoring source layer ori_score_ori_score_0_split
+I0112 16:16:43.243686  5505 net.cpp:743] Ignoring source layer loss_ori
+I0112 16:16:43.243687  5505 net.cpp:743] Ignoring source layer accuarcy_ori
+F0112 16:17:31.410266  5505 math_functions.cpp:91] Check failed: error == cudaSuccess (77 vs. 0)  an illegal memory access was encountered

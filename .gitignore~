@@ -12,7 +12,6 @@ $RECYCLE.BIN/
 models/\*.caffemodel
 models/\*.mat
 data/
-output/
 datasets/
 external/caffe/matlab
 external/caffe/build/

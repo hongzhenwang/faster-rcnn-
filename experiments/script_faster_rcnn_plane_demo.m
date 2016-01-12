@@ -15,14 +15,15 @@ active_caffe_mex(opts.gpu_id, opts.caffe_version);
 end
 opts.per_nms_topN           = 6000;
 opts.nms_overlap_thres      = 0.7;
-opts.after_nms_topN         = 300;
+opts.after_nms_topN         = 2000;
 opts.use_gpu                = true;
 
 opts.test_scales            = 600;
 
 %% -------------------- INIT_MODEL --------------------
 % model_dir                   = fullfile(pwd, 'output', 'faster_rcnn_final', 'faster_rcnn_VOC0712_vgg_16layers'); %% VGG-16
-model_dir                   = fullfile(pwd, 'output', 'faster_rcnn_final', 'faster_plane_ZF_ChangeAnchor_con3'); %% ZF
+% model_dir                   = fullfile(pwd, 'output', 'faster_rcnn_final', 'faster_plane_ZF_ChangeAnchor_con3'); %% ZF
+model_dir                   = fullfile(pwd, 'output', 'faster_rcnn_final', 'plane_lenet'); %% ZF
 proposal_detection_model    = load_proposal_detection_model(model_dir);
 
 proposal_detection_model.conf_proposal.test_scales = opts.test_scales;
@@ -37,7 +38,7 @@ end
 rpn_net = caffe.Net(proposal_detection_model.proposal_net_def, 'test');
 rpn_net.copy_from(proposal_detection_model.proposal_net);
 % fast rcnn net
-        % init caffe net
+% %         init caffe net
 %         caffe_log_file_base = fullfile(pwd, 'caffe_plane_log');
 %         caffe.init_log(caffe_log_file_base);
 fast_rcnn_net = caffe.Net(proposal_detection_model.detection_net_def, 'test');
@@ -122,7 +123,7 @@ for j = 1:length(im_dir)%im_names)
     % visualize
     classes = proposal_detection_model.classes;
     boxes_cell = cell(length(classes), 1);
-    thres = 0.6;
+    thres = 0.9;
     for i = 1:length(boxes_cell)
         boxes_cell{i} = [boxes(:, (1+(i-1)*4):(i*4)), scores(:, i)];
         boxes_cell{i} = boxes_cell{i}(nms(boxes_cell{i}, 0.3), :);

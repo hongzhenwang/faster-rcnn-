@@ -34,6 +34,10 @@ model.stage2_rpn.nms.after_nms_topN           	= 2000;
 model.stage2_fast_rcnn.solver_def_file          = fullfile(pwd, 'models', 'fast_rcnn_prototxts', 'lenet_stage2', 'solver_5k10k.prototxt');
 model.stage2_fast_rcnn.test_net_def_file        = fullfile(pwd, 'models', 'fast_rcnn_prototxts', 'lenet_stage2', 'test_plane_4a.prototxt');
 
+%% stage  ori, only finetune fc layers
+model.stage_ori.solver_def_file          = fullfile(pwd, 'models', 'ori_prototxts', 'lenet_with_bbox', 'solver_5k10k.prototxt');
+model.stage_ori.test_net_def_file        = fullfile(pwd, 'models', 'ori_prototxts', 'lenet_with_bbox', 'test_plane_4a.prototxt');
+
 %% final test
 model.final_test.nms.per_nms_topN            	= 6000; % to speed up nms
 model.final_test.nms.nms_overlap_thres       	= 0.7;

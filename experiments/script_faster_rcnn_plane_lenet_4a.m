@@ -36,6 +36,7 @@ dataset                     = Dataset.plane_test(dataset, 'test', false);
 % conf
 conf_proposal               = proposal_config('image_means', model.mean_image, 'feat_stride', model.feat_stride);
 conf_fast_rcnn              = fast_rcnn_config('image_means', model.mean_image);
+conf_ori                       = ori_config('image_means', model.mean_image);
 % set cache folder for each stage
 model                       = Faster_RCNN_Train.set_cache_folder(cache_base_proposal, cache_base_fast_rcnn, model);
 % generate anchors and pre-calculate output size of rpn network 
@@ -67,7 +68,7 @@ fprintf('\n***************\nstage one fast rcnn\n***************\n');
 % train
 model.stage1_fast_rcnn      = Faster_RCNN_Train.do_fast_rcnn_train(conf_fast_rcnn, dataset, model.stage1_fast_rcnn, opts.do_val);
 % test
-opts.mAP                    = Faster_RCNN_Train.do_fast_rcnn_test(conf_fast_rcnn, model.stage1_fast_rcnn, dataset.imdb_test, dataset.roidb_test);
+% % opts.mAP                    = Faster_RCNN_Train.do_fast_rcnn_test(conf_fast_rcnn, model.stage1_fast_rcnn, dataset.imdb_test, dataset.roidb_test);
 
 %%  stage two proposal
 % net proposal
@@ -85,15 +86,26 @@ fprintf('\n***************\nstage two fast rcnn\n***************\n');
 model.stage2_fast_rcnn.init_net_file = model.stage1_fast_rcnn.output_model_file;
 model.stage2_fast_rcnn      = Faster_RCNN_Train.do_fast_rcnn_train(conf_fast_rcnn, dataset, model.stage2_fast_rcnn, opts.do_val);
 
+%%  stage ori
+fprintf('\n***************\nstage ori\n***************\n');
+% train
+model.stage_ori.init_net_file = model.stage1_fast_rcnn.output_model_file;
+model.stage_ori      = Faster_RCNN_Train.do_ori_train(conf_ori, dataset, model.stage_ori, opts.do_val);
+
 %% final test
 fprintf('\n***************\nfinal test\n***************\n');
      
 model.stage2_rpn.nms        = model.final_test.nms;
 dataset.roidb_test       	= Faster_RCNN_Train.do_proposal_test(conf_proposal, model.stage2_rpn, dataset.imdb_test, dataset.roidb_test);
-opts.final_mAP              = Faster_RCNN_Train.do_fast_rcnn_test(conf_fast_rcnn, model.stage2_fast_rcnn, dataset.imdb_test, dataset.roidb_test);
-
-% save final models, for outside tester
-Faster_RCNN_Train.gather_rpn_fast_rcnn_models(conf_proposal, conf_fast_rcnn, model, dataset);
+opts.final_mAP              = Faster_RCNN_Train.do_fast_rcnn_test_ori(conf_fast_rcnn, model.stage_ori, dataset.imdb_test, dataset.roidb_test);
+Faster_RCNN_Train.gather_rpn_fast_rcnn_models_with_ori(conf_proposal, conf_fast_rcnn, model, dataset);
+% % save final models, for outside tester
+% Faster_RCNN_Train.gather_rpn_fast_rcnn_models(conf_proposal, conf_fast_rcnn, model, dataset);model.stage2_rpn.nms        = model.final_test.nms;
+% dataset.roidb_test       	= Faster_RCNN_Train.do_proposal_test(conf_proposal, model.stage2_rpn, dataset.imdb_test, dataset.roidb_test);
+% opts.final_mAP              = Faster_RCNN_Train.do_fast_rcnn_test(conf_fast_rcnn, model.stage2_fast_rcnn, dataset.imdb_test, dataset.roidb_test);
+% 
+% % save final models, for outside tester
+% Faster_RCNN_Train.gather_rpn_fast_rcnn_models(conf_proposal, conf_fast_rcnn, model, dataset);
 end
 
 function [anchors, output_width_map, output_height_map] = proposal_prepare_anchors(conf, cache_name, test_net_def_file)
