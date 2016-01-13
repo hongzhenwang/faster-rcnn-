@@ -1,5 +1,39 @@
 1. lenet+reduce+faster without ori 20160112 10:47
 
+------------------------- Iteration 2000 -------------------------
+Training : err_fg 0.204, err_bg 0.00775, loss (cls 0.0666 + reg 0.0104)
+Testing  : err_fg 0.12, err_bg 0.00405, loss (cls 0.0289 + reg 0.00424)
+
+------------------------- Iteration 4000 -------------------------
+Training : err_fg 0.0746, err_bg 0.00365, loss (cls 0.023 + reg 0.00523)
+Testing  : err_fg 0.094, err_bg 0.00234, loss (cls 0.0188 + reg 0.00346)
+Saved as /home/whz/DNN/faster_rcnn-master/output/rpn_cachedir/plane_lenet_stage1_rpn/plane_2015_trainval/iter_5000
+
+------------------------- Iteration 6000 -------------------------
+Training : err_fg 0.0541, err_bg 0.00294, loss (cls 0.0171 + reg 0.00412)
+Testing  : err_fg 0.0924, err_bg 0.00187, loss (cls 0.0171 + reg 0.00326)
+
+------------------------- Iteration 8000 -------------------------
+Training : err_fg 0.0491, err_bg 0.00298, loss (cls 0.0161 + reg 0.00389)
+Testing  : err_fg 0.0899, err_bg 0.00213, loss (cls 0.0161 + reg 0.00324)
+
+------------------------- Iteration 2000 -------------------------
+Training : err_fg 0.0823, err_bg 0.00541, loss (cls 0.033 + reg 0.00906)
+Testing  : err_fg 0.0603, err_bg 0.00218, loss (cls 0.0162 + reg 0.00371)
+
+------------------------- Iteration 4000 -------------------------
+Training : err_fg 0.0308, err_bg 0.00248, loss (cls 0.0132 + reg 0.00426)
+Testing  : err_fg 0.0604, err_bg 0.000966, loss (cls 0.0125 + reg 0.00323)
+Saved as /home/whz/DNN/faster_rcnn-master/output/rpn_cachedir/plane_lenet_top-1_nms0_7_top2000_stage2_rpn/plane_2015_trainval/iter_5000
+
+------------------------- Iteration 6000 -------------------------
+Training : err_fg 0.0242, err_bg 0.00196, loss (cls 0.0107 + reg 0.00339)
+Testing  : err_fg 0.0468, err_bg 0.00105, loss (cls 0.0119 + reg 0.00289)
+
+------------------------- Iteration 8000 -------------------------
+Training : err_fg 0.0236, err_bg 0.00211, loss (cls 0.0102 + reg 0.00317)
+Testing  : err_fg 0.0476, err_bg 0.00126, loss (cls 0.0116 + reg 0.00287)
+
 stage one fast rcnn
 ***************
 !!! airfreighter : 0.9030 0.9687
@@ -62,3 +96,23 @@ Results:
    86.7637
 
    89.9482
+#**********************plane_demo_result without_ori and noise***************#
+ap =
+
+    0.9649
+    0.9566
+    0.9706
+    0.9762
+    0.9335
+    0.8659
+
+
+re =
+
+    0.9450
+    0.8844
+    0.7811
+    0.9111
+    0.9260
+    0.9103
+
