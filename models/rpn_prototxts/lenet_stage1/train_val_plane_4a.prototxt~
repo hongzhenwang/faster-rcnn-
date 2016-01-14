@@ -9,26 +9,26 @@ input_dim: 224
 input: "labels"
 input_dim: 1 		# to be changed on-the-fly to match input dim
 input_dim: 9        # 9(anchors)        
-input_dim: 15  		# size for 224 input image, to be changed on-the-fly to match input dim
-input_dim: 15  		# size for 224 input image, to be changed on-the-fly to match input dim
+input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
+input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
 
 input: "labels_weights"
 input_dim: 1 		# to be changed on-the-fly to match input dim
 input_dim: 9        # 9(anchors)        
-input_dim: 15  		# size for 224 input image, to be changed on-the-fly to match input dim
-input_dim: 15  		# size for 224 input image, to be changed on-the-fly to match input dim
+input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
+input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
 
 input: "bbox_targets"
 input_dim: 1  		# to be changed on-the-fly to match input dim
 input_dim: 36  		# 4 * 9(anchors) 
-input_dim: 15  		# size for 224 input image, to be changed on-the-fly to match input dim
-input_dim: 15  		# size for 224 input image, to be changed on-the-fly to match input dim
+input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
+input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
 
 input: "bbox_loss_weights"
 input_dim: 1  		# to be changed on-the-fly to match input dim
 input_dim: 36  		# 4 * 9(anchors) 
-input_dim: 15  		# size for 224 input image, to be changed on-the-fly to match input dim
-input_dim: 15  		# size for 224 input image, to be changed on-the-fly to match input dim
+input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
+input_dim: 14  		# size for 224 input image, to be changed on-the-fly to match input dim
 
 
 layer {
@@ -59,15 +59,27 @@ layer {
   }
 }
 layer {
+  name: "conv1/7x7_s2_bn"
+  type: "BatchNorm"
+  bottom: "conv1/7x7_s2"
+  top: "conv1/7x7_s2_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "conv1/relu_7x7"
   type: "ReLU"
-  bottom: "conv1/7x7_s2"
-  top: "conv1/7x7_s2"
+  bottom: "conv1/7x7_s2_bn"
+  top: "conv1/7x7_s2_bn"
 }
 layer {
   name: "pool1/3x3_s2"
   type: "Pooling"
-  bottom: "conv1/7x7_s2"
+  bottom: "conv1/7x7_s2_bn"
   top: "pool1/3x3_s2"
   pooling_param {
     pool: MAX
@@ -112,15 +124,27 @@ layer {
   }
 }
 layer {
+  name: "conv2/3x3_reduce_bn"
+  type: "BatchNorm"
+  bottom: "conv2/3x3_reduce"
+  top: "conv2/3x3_reduce_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "conv2/relu_3x3_reduce"
   type: "ReLU"
-  bottom: "conv2/3x3_reduce"
-  top: "conv2/3x3_reduce"
+  bottom: "conv2/3x3_reduce_bn"
+  top: "conv2/3x3_reduce_bn"
 }
 layer {
   name: "conv2/3x3"
   type: "Convolution"
-  bottom: "conv2/3x3_reduce"
+  bottom: "conv2/3x3_reduce_bn"
   top: "conv2/3x3"
   param {
     lr_mult: 1
@@ -144,15 +168,27 @@ layer {
   }
 }
 layer {
+  name: "conv2/3x3_bn"
+  type: "BatchNorm"
+  bottom: "conv2/3x3"
+  top: "conv2/3x3_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "conv2/relu_3x3"
   type: "ReLU"
-  bottom: "conv2/3x3"
-  top: "conv2/3x3"
+  bottom: "conv2/3x3_bn"
+  top: "conv2/3x3_bn"
 }
 layer {
   name: "conv2/norm2"
   type: "LRN"
-  bottom: "conv2/3x3"
+  bottom: "conv2/3x3_bn"
   top: "conv2/norm2"
   lrn_param {
     local_size: 5
@@ -197,10 +233,22 @@ layer {
   }
 }
 layer {
+  name: "inception_3a/1x1_bn"
+  type: "BatchNorm"
+  bottom: "inception_3a/1x1"
+  top: "inception_3a/1x1_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_3a/relu_1x1"
   type: "ReLU"
-  bottom: "inception_3a/1x1"
-  top: "inception_3a/1x1"
+  bottom: "inception_3a/1x1_bn"
+  top: "inception_3a/1x1_bn"
 }
 layer {
   name: "inception_3a/3x3_reduce"
@@ -228,15 +276,27 @@ layer {
   }
 }
 layer {
+  name: "inception_3a/3x3_reduce_bn"
+  type: "BatchNorm"
+  bottom: "inception_3a/3x3_reduce"
+  top: "inception_3a/3x3_reduce_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_3a/relu_3x3_reduce"
   type: "ReLU"
-  bottom: "inception_3a/3x3_reduce"
-  top: "inception_3a/3x3_reduce"
+  bottom: "inception_3a/3x3_reduce_bn"
+  top: "inception_3a/3x3_reduce_bn"
 }
 layer {
   name: "inception_3a/3x3"
   type: "Convolution"
-  bottom: "inception_3a/3x3_reduce"
+  bottom: "inception_3a/3x3_reduce_bn"
   top: "inception_3a/3x3"
   param {
     lr_mult: 1
@@ -260,10 +320,22 @@ layer {
   }
 }
 layer {
+  name: "inception_3a/3x3_bn"
+  type: "BatchNorm"
+  bottom: "inception_3a/3x3"
+  top: "inception_3a/3x3_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_3a/relu_3x3"
   type: "ReLU"
-  bottom: "inception_3a/3x3"
-  top: "inception_3a/3x3"
+  bottom: "inception_3a/3x3_bn"
+  top: "inception_3a/3x3_bn"
 }
 layer {
   name: "inception_3a/5x5_reduce"
@@ -291,10 +363,22 @@ layer {
   }
 }
 layer {
+  name: "inception_3a/5x5_reduce_bn"
+  type: "BatchNorm"
+  bottom: "inception_3a/5x5_reduce"
+  top: "inception_3a/5x5_reduce_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_3a/relu_5x5_reduce"
   type: "ReLU"
-  bottom: "inception_3a/5x5_reduce"
-  top: "inception_3a/5x5_reduce"
+  bottom: "inception_3a/5x5_reduce_bn"
+  top: "inception_3a/5x5_reduce_bn"
 }
 layer {
   name: "inception_3a/5x5"
@@ -323,10 +407,22 @@ layer {
   }
 }
 layer {
+  name: "inception_3a/5x5_bn"
+  type: "BatchNorm"
+  bottom: "inception_3a/5x5"
+  top: "inception_3a/5x5_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_3a/relu_5x5"
   type: "ReLU"
-  bottom: "inception_3a/5x5"
-  top: "inception_3a/5x5"
+  bottom: "inception_3a/5x5_bn"
+  top: "inception_3a/5x5_bn"
 }
 layer {
   name: "inception_3a/pool"
@@ -366,18 +462,30 @@ layer {
   }
 }
 layer {
+  name: "inception_3a/pool_proj_bn"
+  type: "BatchNorm"
+  bottom: "inception_3a/pool_proj"
+  top: "inception_3a/pool_proj_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_3a/relu_pool_proj"
   type: "ReLU"
-  bottom: "inception_3a/pool_proj"
-  top: "inception_3a/pool_proj"
+  bottom: "inception_3a/pool_proj_bn"
+  top: "inception_3a/pool_proj_bn"
 }
 layer {
   name: "inception_3a/output"
   type: "Concat"
-  bottom: "inception_3a/1x1"
-  bottom: "inception_3a/3x3"
-  bottom: "inception_3a/5x5"
-  bottom: "inception_3a/pool_proj"
+  bottom: "inception_3a/1x1_bn"
+  bottom: "inception_3a/3x3_bn"
+  bottom: "inception_3a/5x5_bn"
+  bottom: "inception_3a/pool_proj_bn"
   top: "inception_3a/output"
 }
 layer {
@@ -406,10 +514,22 @@ layer {
   }
 }
 layer {
+  name: "inception_3a/1x1_bn"
+  type: "BatchNorm"
+  bottom: "inception_3a/1x1"
+  top: "inception_3a/1x1_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_3b/relu_1x1"
   type: "ReLU"
-  bottom: "inception_3b/1x1"
-  top: "inception_3b/1x1"
+  bottom: "inception_3b/1x1_bn"
+  top: "inception_3b/1x1_bn"
 }
 layer {
   name: "inception_3b/3x3_reduce"
@@ -437,15 +557,27 @@ layer {
   }
 }
 layer {
+  name: "inception_3a/3x3_reduce_bn"
+  type: "BatchNorm"
+  bottom: "inception_3a/3x3_reduce"
+  top: "inception_3a/3x3_reduce_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_3b/relu_3x3_reduce"
   type: "ReLU"
-  bottom: "inception_3b/3x3_reduce"
-  top: "inception_3b/3x3_reduce"
+  bottom: "inception_3b/3x3_reduce_bn"
+  top: "inception_3b/3x3_reduce_bn"
 }
 layer {
   name: "inception_3b/3x3"
   type: "Convolution"
-  bottom: "inception_3b/3x3_reduce"
+  bottom: "inception_3b/3x3_reduce_bn"
   top: "inception_3b/3x3"
   param {
     lr_mult: 1
@@ -469,10 +601,22 @@ layer {
   }
 }
 layer {
+  name: "inception_3a/3x3_bn"
+  type: "BatchNorm"
+  bottom: "inception_3a/3x3"
+  top: "inception_3a/3x3_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_3b/relu_3x3"
   type: "ReLU"
-  bottom: "inception_3b/3x3"
-  top: "inception_3b/3x3"
+  bottom: "inception_3b/3x3_bn"
+  top: "inception_3b/3x3_bn"
 }
 layer {
   name: "inception_3b/5x5_reduce"
@@ -500,15 +644,27 @@ layer {
   }
 }
 layer {
+  name: "inception_3a/5x5_reduce_bn"
+  type: "BatchNorm"
+  bottom: "inception_3a/5x5_reduce"
+  top: "inception_3a/5x5_reduce_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_3b/relu_5x5_reduce"
   type: "ReLU"
-  bottom: "inception_3b/5x5_reduce"
-  top: "inception_3b/5x5_reduce"
+  bottom: "inception_3b/5x5_reduce_bn"
+  top: "inception_3b/5x5_reduce_bn"
 }
 layer {
   name: "inception_3b/5x5"
   type: "Convolution"
-  bottom: "inception_3b/5x5_reduce"
+  bottom: "inception_3b/5x5_reduce_bn"
   top: "inception_3b/5x5"
   param {
     lr_mult: 1
@@ -532,10 +688,22 @@ layer {
   }
 }
 layer {
+  name: "inception_3a/5x5_bn"
+  type: "BatchNorm"
+  bottom: "inception_3a/5x5"
+  top: "inception_3a/5x5_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_3b/relu_5x5"
   type: "ReLU"
-  bottom: "inception_3b/5x5"
-  top: "inception_3b/5x5"
+  bottom: "inception_3b/5x5_bn"
+  top: "inception_3b/5x5_bn"
 }
 layer {
   name: "inception_3b/pool"
@@ -575,18 +743,30 @@ layer {
   }
 }
 layer {
+  name: "inception_3a/pool_proj_bn"
+  type: "BatchNorm"
+  bottom: "inception_3a/pool_proj"
+  top: "inception_3a/pool_proj_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_3b/relu_pool_proj"
   type: "ReLU"
-  bottom: "inception_3b/pool_proj"
-  top: "inception_3b/pool_proj"
+  bottom: "inception_3b/pool_proj_bn"
+  top: "inception_3b/pool_proj_bn"
 }
 layer {
   name: "inception_3b/output"
   type: "Concat"
-  bottom: "inception_3b/1x1"
-  bottom: "inception_3b/3x3"
-  bottom: "inception_3b/5x5"
-  bottom: "inception_3b/pool_proj"
+  bottom: "inception_3b/1x1_bn"
+  bottom: "inception_3b/3x3_bn"
+  bottom: "inception_3b/5x5_bn"
+  bottom: "inception_3b/pool_proj_bn"
   top: "inception_3b/output"
 }
 layer {
@@ -626,10 +806,22 @@ layer {
   }
 }
 layer {
+  name: "inception_4a/1x1_bn"
+  type: "BatchNorm"
+  bottom: "inception_4a/1x1"
+  top: "inception_4a/1x1_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_4a/relu_1x1"
   type: "ReLU"
-  bottom: "inception_4a/1x1"
-  top: "inception_4a/1x1"
+  bottom: "inception_4a/1x1_bn"
+  top: "inception_4a/1x1_bn"
 }
 layer {
   name: "inception_4a/3x3_reduce"
@@ -657,15 +849,27 @@ layer {
   }
 }
 layer {
+  name: "inception_4a/3x3_reduce_bn"
+  type: "BatchNorm"
+  bottom: "inception_4a/3x3_reduce"
+  top: "inception_4a/3x3_reduce_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_4a/relu_3x3_reduce"
   type: "ReLU"
-  bottom: "inception_4a/3x3_reduce"
-  top: "inception_4a/3x3_reduce"
+  bottom: "inception_4a/3x3_reduce_bn"
+  top: "inception_4a/3x3_reduce_bn"
 }
 layer {
   name: "inception_4a/3x3"
   type: "Convolution"
-  bottom: "inception_4a/3x3_reduce"
+  bottom: "inception_4a/3x3_reduce_bn"
   top: "inception_4a/3x3"
   param {
     lr_mult: 1
@@ -689,10 +893,22 @@ layer {
   }
 }
 layer {
+  name: "inception_4a/3x3_bn"
+  type: "BatchNorm"
+  bottom: "inception_4a/3x3"
+  top: "inception_4a/3x3_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_4a/relu_3x3"
   type: "ReLU"
-  bottom: "inception_4a/3x3"
-  top: "inception_4a/3x3"
+  bottom: "inception_4a/3x3_bn"
+  top: "inception_4a/3x3_bn"
 }
 layer {
   name: "inception_4a/5x5_reduce"
@@ -720,15 +936,27 @@ layer {
   }
 }
 layer {
+  name: "inception_4a/5x5_reduce_bn"
+  type: "BatchNorm"
+  bottom: "inception_4a/5x5_reduce"
+  top: "inception_4a/5x5_reduce_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_4a/relu_5x5_reduce"
   type: "ReLU"
-  bottom: "inception_4a/5x5_reduce"
-  top: "inception_4a/5x5_reduce"
+  bottom: "inception_4a/5x5_reduce_bn"
+  top: "inception_4a/5x5_reduce_bn"
 }
 layer {
   name: "inception_4a/5x5"
   type: "Convolution"
-  bottom: "inception_4a/5x5_reduce"
+  bottom: "inception_4a/5x5_reduce_bn"
   top: "inception_4a/5x5"
   param {
     lr_mult: 1
@@ -752,10 +980,22 @@ layer {
   }
 }
 layer {
+  name: "inception_4a/5x5_bn"
+  type: "BatchNorm"
+  bottom: "inception_4a/5x5"
+  top: "inception_4a/5x5_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_4a/relu_5x5"
   type: "ReLU"
-  bottom: "inception_4a/5x5"
-  top: "inception_4a/5x5"
+  bottom: "inception_4a/5x5_bn"
+  top: "inception_4a/5x5_bn"
 }
 layer {
   name: "inception_4a/pool"
@@ -795,18 +1035,30 @@ layer {
   }
 }
 layer {
+  name: "inception_4a/pool_proj_bn"
+  type: "BatchNorm"
+  bottom: "inception_4a/pool_proj"
+  top: "inception_4a/pool_proj_bn"
+  batch_norm_param{
+  moving_average_fraction: 0.999
+  }
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+}
+layer {
   name: "inception_4a/relu_pool_proj"
   type: "ReLU"
-  bottom: "inception_4a/pool_proj"
-  top: "inception_4a/pool_proj"
+  bottom: "inception_4a/pool_proj_bn"
+  top: "inception_4a/pool_proj_bn"
 }
 layer {
   name: "inception_4a/output"
   type: "Concat"
-  bottom: "inception_4a/1x1"
-  bottom: "inception_4a/3x3"
-  bottom: "inception_4a/5x5"
-  bottom: "inception_4a/pool_proj"
+  bottom: "inception_4a/1x1_bn"
+  bottom: "inception_4a/3x3_bn"
+  bottom: "inception_4a/5x5_bn"
+  bottom: "inception_4a/pool_proj_bn"
   top: "inception_4a/output"
 }
 #-----------------------layer +-------------------------

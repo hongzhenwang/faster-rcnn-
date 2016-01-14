@@ -121,9 +121,9 @@ layer {
   batch_norm_param{
   moving_average_fraction: 0.999
   }
-param {lr_mult: 0}
-param {lr_mult: 0}
-param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
+  param {lr_mult: 0}
 }
 layer {
   name: "ip1"

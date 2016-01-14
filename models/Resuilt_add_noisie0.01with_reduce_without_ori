@@ -1,0 +1,164 @@
+stage one proposal 
+***************
+------------------------- Iteration 2000 -------------------------
+Training : err_fg 0.0944, err_bg 0.00528, loss (cls 0.0363 + reg 0.00731)
+Testing  : err_fg 0.0677, err_bg 0.00186, loss (cls 0.0133 + reg 0.00336)
+
+------------------------- Iteration 4000 -------------------------
+Training : err_fg 0.0238, err_bg 0.00199, loss (cls 0.00976 + reg 0.00372)
+Testing  : err_fg 0.0746, err_bg 0.000701, loss (cls 0.0116 + reg 0.00264)
+Saved as /home/whz/DNN/faster_rcnn-master/output/rpn_cachedir/plane_lenet_stage1_rpn/plane_2015_trainval/iter_5000
+
+------------------------- Iteration 6000 -------------------------
+Training : err_fg 0.0111, err_bg 0.0012, loss (cls 0.00576 + reg 0.0023)
+Testing  : err_fg 0.0499, err_bg 0.000841, loss (cls 0.0103 + reg 0.00236)
+
+------------------------- Iteration 8000 -------------------------
+Training : err_fg 0.00923, err_bg 0.00134, loss (cls 0.00532 + reg 0.00214)
+Testing  : err_fg 0.049, err_bg 0.000505, loss (cls 0.00931 + reg 0.00232)
+Saved as /home/whz/DNN/faster_rcnn-master/output/rpn_cachedir/plane_lenet_stage1_rpn/plane_2015_trainval/iter_100
+***************
+stage one fast rcnn
+***************
+
+------------------------- Iteration 1000 -------------------------
+Training : error 0.205, loss (cls 0.625, reg 0.344)
+Testing  : error 0.139, loss (cls 0.374, reg 0.257)
+
+------------------------- Iteration 2000 -------------------------
+Training : error 0.128, loss (cls 0.35, reg 0.238)
+Testing  : error 0.1, loss (cls 0.26, reg 0.217)
+
+------------------------- Iteration 3000 -------------------------
+Training : error 0.098, loss (cls 0.256, reg 0.202)
+Testing  : error 0.0949, loss (cls 0.252, reg 0.181)
+
+------------------------- Iteration 4000 -------------------------
+Training : error 0.0821, loss (cls 0.209, reg 0.176)
+Testing  : error 0.082, loss (cls 0.209, reg 0.174)
+
+------------------------- Iteration 5000 -------------------------
+Training : error 0.0743, loss (cls 0.183, reg 0.158)
+Testing  : error 0.0834, loss (cls 0.207, reg 0.157)
+Saved as /home/whz/DNN/faster_rcnn-master/output/fast_rcnn_cachedir/plane_lenet_top-1_nms0_7_top2000_stage1_fast_rcnn/plane_2015_trainval/iter_5000
+
+------------------------- Iteration 6000 -------------------------
+Training : error 0.0629, loss (cls 0.154, reg 0.138)
+Testing  : error 0.0816, loss (cls 0.184, reg 0.141)
+
+------------------------- Iteration 7000 -------------------------
+Training : error 0.0602, loss (cls 0.145, reg 0.131)
+Testing  : error 0.0782, loss (cls 0.185, reg 0.144)
+
+------------------------- Iteration 8000 -------------------------
+Training : error 0.0591, loss (cls 0.144, reg 0.129)
+Testing  : error 0.0718, loss (cls 0.168, reg 0.14)
+
+------------------------- Iteration 9000 -------------------------
+Training : error 0.058, loss (cls 0.14, reg 0.127)
+Testing  : error 0.0822, loss (cls 0.196, reg 0.141)
+
+------------------------- Iteration 10000 -------------------------
+Training : error 0.0577, loss (cls 0.139, reg 0.126)
+Testing  : error 0.0731, loss (cls 0.178, reg 0.139)
+Saved as /home/whz/DNN/faster_rcnn-master/output/fast_rcnn_cachedir/plane_lenet_top-1_nms0_7_top2000_stage1_fast_rcnn/plane_2015_trainval/iter_10000
+
+------------------------- Iteration 11000 -------------------------
+Training : error 0.0568, loss (cls 0.137, reg 0.124)
+Testing  : error 0.0675, loss (cls 0.169, reg 0.138)
+
+!!! airfreighter : 0.9027 0.9648
+!!! fighter : 0.8971 0.9648
+!!! bomber : 0.8966 0.9434
+!!! AEM : 0.9012 0.9637
+!!! aerobus : 0.8994 0.9707
+!!! tanker : 0.8960 0.9336
+
+~~~~~~~~~~~~~~~~~~~~
+Results:
+   90.2743
+   89.7124
+   89.6600
+   90.1186
+   89.9417
+   89.5980
+
+   89.8842
+
+
+----------------------- Iteration 2000 -------------------------
+Training : err_fg 0.119, err_bg 0.00478, loss (cls 0.0373 + reg 0.00958)
+Testing  : err_fg 0.141, err_bg 0.00254, loss (cls 0.0235 + reg 0.00525)
+
+------------------------- Iteration 4000 -------------------------
+Training : err_fg 0.0579, err_bg 0.0032, loss (cls 0.0206 + reg 0.00726)
+Testing  : err_fg 0.0434, err_bg 0.00268, loss (cls 0.0151 + reg 0.0054)
+Saved as /home/whz/DNN/faster_rcnn-master/output/rpn_cachedir/plane_lenet_top-1_nms0_7_top2000_stage2_rpn/plane_2015_trainval/iter_5000
+
+------------------------- Iteration 6000 -------------------------
+Training : err_fg 0.0207, err_bg 0.00258, loss (cls 0.011 + reg 0.005)
+Testing  : err_fg 0.0372, err_bg 0.00127, loss (cls 0.00765 + reg 0.00267)
+
+------------------------- Iteration 8000 -------------------------
+Training : err_fg 0.0162, err_bg 0.00198, loss (cls 0.00774 + reg 0.00392)
+Testing  : err_fg 0.0376, err_bg 0.000905, loss (cls 0.00713 + reg 0.00249)
+
+------------------------- Iteration 1000 -------------------------
+Training : error 0.0827, loss (cls 0.193, reg 0.159)
+Testing  : error 0.0852, loss (cls 0.203, reg 0.148)
+
+------------------------- Iteration 2000 -------------------------
+Training : error 0.0781, loss (cls 0.184, reg 0.139)
+Testing  : error 0.081, loss (cls 0.191, reg 0.146)
+
+------------------------- Iteration 3000 -------------------------
+Training : error 0.0772, loss (cls 0.18, reg 0.134)
+Testing  : error 0.0798, loss (cls 0.192, reg 0.146)
+
+------------------------- Iteration 4000 -------------------------
+Training : error 0.0738, loss (cls 0.173, reg 0.132)
+Testing  : error 0.0807, loss (cls 0.189, reg 0.141)
+
+------------------------- Iteration 5000 -------------------------
+Training : error 0.0719, loss (cls 0.167, reg 0.13)
+Testing  : error 0.0803, loss (cls 0.189, reg 0.133)
+Saved as /home/whz/DNN/faster_rcnn-master/output/fast_rcnn_cachedir/plane_lenet_top-1_nms0_7_top2000_stage2_fast_rcnn/plane_2015_trainval/iter_5000
+
+------------------------- Iteration 6000 -------------------------
+Training : error 0.0684, loss (cls 0.161, reg 0.123)
+Testing  : error 0.0783, loss (cls 0.194, reg 0.141)
+
+------------------------- Iteration 7000 -------------------------
+Training : error 0.0693, loss (cls 0.161, reg 0.121)
+Testing  : error 0.0804, loss (cls 0.191, reg 0.134)
+
+------------------------- Iteration 8000 -------------------------
+Training : error 0.0674, loss (cls 0.159, reg 0.121)
+Testing  : error 0.0818, loss (cls 0.198, reg 0.136)
+
+------------------------- Iteration 9000 -------------------------
+Training : error 0.0658, loss (cls 0.155, reg 0.119)
+Testing  : error 0.0798, loss (cls 0.181, reg 0.133)
+
+------------------------- Iteration 10000 -------------------------
+Training : error 0.0684, loss (cls 0.158, reg 0.12)
+Testing  : error 0.0767, loss (cls 0.188, reg 0.136)
+Saved as /home/whz/DNN/faster_rcnn-master/output/fast_rcnn_cachedir/plane_lenet_top-1_nms0_7_top2000_stage2_fast_rcnn/plane_2015_trainval/iter_10000
+
+------------------------- Iteration 11000 -------------------------
+Training : error 0.0663, loss (cls 0.155, reg 0.12)
+Testing  : error 0.0786, loss (cls 0.187, reg 0.138)
+
+~~~~~~~~~~~~~~~~~~~~
+Results:
+   90.4418
+   89.1665
+   91.8502
+   98.6681
+   90.2653
+   90.9124
+
+   91.8841
+
+~~~~~~~~~~~~~~~~~~~~
+

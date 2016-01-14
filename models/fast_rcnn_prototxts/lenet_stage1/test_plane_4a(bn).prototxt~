@@ -19,11 +19,11 @@ layer {
   bottom: "data"
   top: "conv1/7x7_s2"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -46,7 +46,7 @@ layer {
   bottom: "conv1/7x7_s2"
   top: "conv1/7x7_s2_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -86,11 +86,11 @@ layer {
   bottom: "pool1/norm1"
   top: "conv2/3x3_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -111,7 +111,7 @@ layer {
   bottom: "conv2/3x3_reduce"
   top: "conv2/3x3_reduce_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -129,11 +129,11 @@ layer {
   bottom: "conv2/3x3_reduce_bn"
   top: "conv2/3x3"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -155,7 +155,7 @@ layer {
   bottom: "conv2/3x3"
   top: "conv2/3x3_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -195,11 +195,11 @@ layer {
   bottom: "pool2/3x3_s2"
   top: "inception_3a/1x1"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -220,7 +220,7 @@ layer {
   bottom: "inception_3a/1x1"
   top: "inception_3a/1x1_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -238,11 +238,11 @@ layer {
   bottom: "pool2/3x3_s2"
   top: "inception_3a/3x3_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -263,7 +263,7 @@ layer {
   bottom: "inception_3a/3x3_reduce"
   top: "inception_3a/3x3_reduce_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -281,11 +281,11 @@ layer {
   bottom: "inception_3a/3x3_reduce_bn"
   top: "inception_3a/3x3"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -307,7 +307,7 @@ layer {
   bottom: "inception_3a/3x3"
   top: "inception_3a/3x3_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -325,11 +325,11 @@ layer {
   bottom: "pool2/3x3_s2"
   top: "inception_3a/5x5_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -350,7 +350,7 @@ layer {
   bottom: "inception_3a/5x5_reduce"
   top: "inception_3a/5x5_reduce_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -368,11 +368,11 @@ layer {
   bottom: "inception_3a/5x5_reduce_bn"
   top: "inception_3a/5x5"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -394,7 +394,7 @@ layer {
   bottom: "inception_3a/5x5"
   top: "inception_3a/5x5_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -424,11 +424,11 @@ layer {
   bottom: "inception_3a/pool"
   top: "inception_3a/pool_proj"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -449,7 +449,7 @@ layer {
   bottom: "inception_3a/pool_proj"
   top: "inception_3a/pool_proj_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -476,11 +476,11 @@ layer {
   bottom: "inception_3a/output"
   top: "inception_3b/1x1"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -501,7 +501,7 @@ layer {
   bottom: "inception_3b/1x1"
   top: "inception_3b/1x1_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -519,11 +519,11 @@ layer {
   bottom: "inception_3a/output"
   top: "inception_3b/3x3_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -544,7 +544,7 @@ layer {
   bottom: "inception_3b/3x3_reduce"
   top: "inception_3b/3x3_reduce_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -562,11 +562,11 @@ layer {
   bottom: "inception_3b/3x3_reduce_bn"
   top: "inception_3b/3x3"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -588,7 +588,7 @@ layer {
   bottom: "inception_3b/3x3"
   top: "inception_3b/3x3_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -606,11 +606,11 @@ layer {
   bottom: "inception_3a/output"
   top: "inception_3b/5x5_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -631,7 +631,7 @@ layer {
   bottom: "inception_3b/5x5_reduce"
   top: "inception_3b/5x5_reduce_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -649,11 +649,11 @@ layer {
   bottom: "inception_3b/5x5_reduce_bn"
   top: "inception_3b/5x5"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -675,7 +675,7 @@ layer {
   bottom: "inception_3b/5x5"
   top: "inception_3b/5x5_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -705,11 +705,11 @@ layer {
   bottom: "inception_3b/pool"
   top: "inception_3b/pool_proj"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -730,7 +730,7 @@ layer {
   bottom: "inception_3b/pool_proj"
   top: "inception_3b/pool_proj_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -768,11 +768,11 @@ layer {
   bottom: "pool3/3x3_s2"
   top: "inception_4a/1x1"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -793,7 +793,7 @@ layer {
   bottom: "inception_4a/1x1"
   top: "inception_4a/1x1_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -811,11 +811,11 @@ layer {
   bottom: "pool3/3x3_s2"
   top: "inception_4a/3x3_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -836,7 +836,7 @@ layer {
   bottom: "inception_4a/3x3_reduce"
   top: "inception_4a/3x3_reduce_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -854,11 +854,11 @@ layer {
   bottom: "inception_4a/3x3_reduce_bn"
   top: "inception_4a/3x3"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -880,7 +880,7 @@ layer {
   bottom: "inception_4a/3x3"
   top: "inception_4a/3x3_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -898,11 +898,11 @@ layer {
   bottom: "pool3/3x3_s2"
   top: "inception_4a/5x5_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -923,7 +923,7 @@ layer {
   bottom: "inception_4a/5x5_reduce"
   top: "inception_4a/5x5_reduce_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -941,11 +941,11 @@ layer {
   bottom: "inception_4a/5x5_reduce_bn"
   top: "inception_4a/5x5"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -967,7 +967,7 @@ layer {
   bottom: "inception_4a/5x5"
   top: "inception_4a/5x5_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
@@ -997,11 +997,11 @@ layer {
   bottom: "inception_4a/pool"
   top: "inception_4a/pool_proj"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -1022,7 +1022,7 @@ layer {
   bottom: "inception_4a/pool_proj"
   top: "inception_4a/pool_proj_bn"
   batch_norm_param{
-  moving_average_fraction: 0.999
+  use_global_stats: 1
   }
   param {lr_mult: 0}
   param {lr_mult: 0}
