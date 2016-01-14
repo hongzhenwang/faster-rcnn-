@@ -60,15 +60,25 @@ layer {
 }
 layer {
   name: "conv1/7x7_s2_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "conv1/7x7_s2"
   top: "conv1/7x7_s2_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "conv1/relu_7x7"
@@ -125,15 +135,25 @@ layer {
 }
 layer {
   name: "conv2/3x3_reduce_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "conv2/3x3_reduce"
   top: "conv2/3x3_reduce_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "conv2/relu_3x3_reduce"
@@ -169,15 +189,25 @@ layer {
 }
 layer {
   name: "conv2/3x3_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "conv2/3x3"
   top: "conv2/3x3_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "conv2/relu_3x3"
@@ -234,15 +264,25 @@ layer {
 }
 layer {
   name: "inception_3a/1x1_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_3a/1x1"
   top: "inception_3a/1x1_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_3a/relu_1x1"
@@ -277,15 +317,25 @@ layer {
 }
 layer {
   name: "inception_3a/3x3_reduce_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_3a/3x3_reduce"
   top: "inception_3a/3x3_reduce_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_3a/relu_3x3_reduce"
@@ -321,15 +371,25 @@ layer {
 }
 layer {
   name: "inception_3a/3x3_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_3a/3x3"
   top: "inception_3a/3x3_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_3a/relu_3x3"
@@ -364,15 +424,25 @@ layer {
 }
 layer {
   name: "inception_3a/5x5_reduce_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_3a/5x5_reduce"
   top: "inception_3a/5x5_reduce_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_3a/relu_5x5_reduce"
@@ -408,15 +478,25 @@ layer {
 }
 layer {
   name: "inception_3a/5x5_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_3a/5x5"
   top: "inception_3a/5x5_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_3a/relu_5x5"
@@ -463,15 +543,25 @@ layer {
 }
 layer {
   name: "inception_3a/pool_proj_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_3a/pool_proj"
   top: "inception_3a/pool_proj_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_3a/relu_pool_proj"
@@ -515,15 +605,25 @@ layer {
 }
 layer {
   name: "inception_3b/1x1_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_3b/1x1"
   top: "inception_3b/1x1_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_3b/relu_1x1"
@@ -558,15 +658,25 @@ layer {
 }
 layer {
   name: "inception_3b/3x3_reduce_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_3b/3x3_reduce"
   top: "inception_3b/3x3_reduce_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_3b/relu_3x3_reduce"
@@ -602,15 +712,25 @@ layer {
 }
 layer {
   name: "inception_3b/3x3_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_3b/3x3"
   top: "inception_3b/3x3_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_3b/relu_3x3"
@@ -645,15 +765,25 @@ layer {
 }
 layer {
   name: "inception_3b/5x5_reduce_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_3b/5x5_reduce"
   top: "inception_3b/5x5_reduce_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_3b/relu_5x5_reduce"
@@ -689,15 +819,25 @@ layer {
 }
 layer {
   name: "inception_3b/5x5_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_3b/5x5"
   top: "inception_3b/5x5_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_3b/relu_5x5"
@@ -744,15 +884,25 @@ layer {
 }
 layer {
   name: "inception_3b/pool_proj_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_3b/pool_proj"
   top: "inception_3b/pool_proj_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_3b/relu_pool_proj"
@@ -807,15 +957,25 @@ layer {
 }
 layer {
   name: "inception_4a/1x1_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_4a/1x1"
   top: "inception_4a/1x1_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_4a/relu_1x1"
@@ -850,15 +1010,25 @@ layer {
 }
 layer {
   name: "inception_4a/3x3_reduce_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_4a/3x3_reduce"
   top: "inception_4a/3x3_reduce_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_4a/relu_3x3_reduce"
@@ -894,15 +1064,25 @@ layer {
 }
 layer {
   name: "inception_4a/3x3_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_4a/3x3"
   top: "inception_4a/3x3_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_4a/relu_3x3"
@@ -937,15 +1117,25 @@ layer {
 }
 layer {
   name: "inception_4a/5x5_reduce_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_4a/5x5_reduce"
   top: "inception_4a/5x5_reduce_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_4a/relu_5x5_reduce"
@@ -981,15 +1171,25 @@ layer {
 }
 layer {
   name: "inception_4a/5x5_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_4a/5x5"
   top: "inception_4a/5x5_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_4a/relu_5x5"
@@ -1036,15 +1236,25 @@ layer {
 }
 layer {
   name: "inception_4a/pool_proj_bn"
-  type: "BatchNorm"
+  type: "BN"
   bottom: "inception_4a/pool_proj"
   top: "inception_4a/pool_proj_bn"
-  batch_norm_param{
-  use_global_stats: 1
+  param {
+    lr_mult: 1
   }
-#  param {lr_mult: 0}
-  #param {lr_mult: 0}
-  #param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "inception_4a/relu_pool_proj"

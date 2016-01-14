@@ -67,22 +67,11 @@ layer {
     stride: 2
   }
 }
-layer {
-  name: "batch_norm"
-  type: "BatchNorm"
-  bottom: "pool1"
-  top: "bn1"
-  batch_norm_param{
-  moving_average_fraction: 0.999
-  }
-param {lr_mult: 0}
-param {lr_mult: 0}
-param {lr_mult: 0}
-}
+
 layer {
   name: "conv2"
   type: "Convolution"
-  bottom: "bn1"
+  bottom: "pool1"
   top: "conv2"
   param {
     lr_mult: 1
@@ -113,22 +102,33 @@ layer {
     stride: 2
   }
 }
+## BN
 layer {
-  name: "batch_norm2"
-  type: "BatchNorm"
+  name: "pool2_bn"
+  type: "BN"
   bottom: "pool2"
-  top: "bn2"
-  batch_norm_param{
-  moving_average_fraction: 0.999
+  top: "pool2bn"
+  param {
+    lr_mult: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+  param {
+    lr_mult: 1
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
 }
 layer {
   name: "ip1"
   type: "InnerProduct"
-  bottom: "bn2"
+  bottom: "pool2bn"
   top: "ip1"
   param {
     lr_mult: 1

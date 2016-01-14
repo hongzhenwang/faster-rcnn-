@@ -112,6 +112,12 @@ message BatchNormParameter {
   // zero.
   optional float eps = 3 [default = 1e-5];
 }
+
+message BNParameter {
+  optional FillerParameter scale_filler = 1; // The filler for the scale
+  optional FillerParameter shift_filler = 2; // The filler for the shift
+}
+
 // NOTE
 // Update the next available ID when you add a new SolverParameter field.
 //
@@ -289,7 +295,7 @@ message ParamSpec {
 // NOTE
 // Update the next available ID when you add a new LayerParameter field.
 //
-// LayerParameter next available layer-specific ID: 139 (last added: batch_norm_param)
+// LayerParameter next available layer-specific ID: 140 (last added: bn_param)
 message LayerParameter {
   optional string name = 1; // the layer name
   optional string type = 2; // the layer type
@@ -339,6 +345,7 @@ message LayerParameter {
   optional AccuracyParameter accuracy_param = 102;
   optional ArgMaxParameter argmax_param = 103;
   optional BatchNormParameter batch_norm_param = 138;
+  optional BNParameter bn_param = 139; 
   optional ConcatParameter concat_param = 104;
   optional ContrastiveLossParameter contrastive_loss_param = 105;
   optional ConvolutionParameter convolution_param = 106;
