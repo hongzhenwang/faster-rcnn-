@@ -56,10 +56,43 @@ layer {
     }
   }
 }
+## BN
+layer {
+  name: "conv1_bn"
+  type: "BN"
+  bottom: "conv1"
+  top: "conv1bn"
+  param {
+    lr_mult: 1
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 1
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  bn_param {
+    scale_filler {
+      type: "constant"
+      value: 1
+    }
+    shift_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
 layer {
   name: "pool1"
   type: "Pooling"
-  bottom: "conv1"
+  bottom: "conv1bn"
   top: "pool1"
   pooling_param {
     pool: MAX
@@ -91,28 +124,27 @@ layer {
     }
   }
 }
-layer {
-  name: "pool2"
-  type: "Pooling"
-  bottom: "conv2"
-  top: "pool2"
-  pooling_param {
-    pool: MAX
-    kernel_size: 2
-    stride: 2
-  }
-}
 ## BN
 layer {
-  name: "pool2_bn"
+  name: "conv2_bn"
   type: "BN"
-  bottom: "pool2"
-  top: "pool2bn"
+  bottom: "conv2"
+  top: "conv2bn"
   param {
     lr_mult: 1
+    decay_mult: 0
   }
   param {
     lr_mult: 1
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
   }
   bn_param {
     scale_filler {
@@ -126,9 +158,21 @@ layer {
   }
 }
 layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "conv2bn"
+  top: "pool2"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+
+layer {
   name: "ip1"
   type: "InnerProduct"
-  bottom: "pool2bn"
+  bottom: "pool2"
   top: "ip1"
   param {
     lr_mult: 1

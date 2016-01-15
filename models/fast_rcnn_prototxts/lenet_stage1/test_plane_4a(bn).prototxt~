@@ -48,9 +48,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "conv1/relu_7x7"
@@ -113,9 +113,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "conv2/relu_3x3_reduce"
@@ -157,9 +157,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "conv2/relu_3x3"
@@ -222,9 +222,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_3a/relu_1x1"
@@ -265,9 +265,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_3a/relu_3x3_reduce"
@@ -309,9 +309,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_3a/relu_3x3"
@@ -352,9 +352,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_3a/relu_5x5_reduce"
@@ -396,9 +396,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_3a/relu_5x5"
@@ -451,9 +451,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_3a/relu_pool_proj"
@@ -503,9 +503,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_3b/relu_1x1"
@@ -546,9 +546,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_3b/relu_3x3_reduce"
@@ -590,9 +590,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_3b/relu_3x3"
@@ -633,9 +633,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_3b/relu_5x5_reduce"
@@ -677,9 +677,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_3b/relu_5x5"
@@ -732,9 +732,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_3b/relu_pool_proj"
@@ -795,9 +795,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_4a/relu_1x1"
@@ -838,9 +838,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_4a/relu_3x3_reduce"
@@ -882,9 +882,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_4a/relu_3x3"
@@ -925,9 +925,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_4a/relu_5x5_reduce"
@@ -969,9 +969,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_4a/relu_5x5"
@@ -1024,9 +1024,9 @@ layer {
   batch_norm_param{
   use_global_stats: 1
   }
-  param {lr_mult: 0}
-  param {lr_mult: 0}
-  param {lr_mult: 0}
+#  param {lr_mult: 0}
+  #param {lr_mult: 0}
+  #param {lr_mult: 0}
 }
 layer {
   name: "inception_4a/relu_pool_proj"

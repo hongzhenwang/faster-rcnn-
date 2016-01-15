@@ -22,7 +22,7 @@ opts.do_val                 = true;
 % model
 model                       = Model.lenet_4a_for_Faster_RCNN_plane;
 % cache base
-cache_base_proposal         = 'plane_lenet';
+cache_base_proposal         = 'plane_lenet_222222';
 cache_base_fast_rcnn        = '';
 % train/test datae
 dataset                     = [];
