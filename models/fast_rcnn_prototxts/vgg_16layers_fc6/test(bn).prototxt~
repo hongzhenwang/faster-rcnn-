@@ -1,4 +1,4 @@
-name: "lenet_4a"
+name: "VGG_ILSVRC_16"
 
 input: "data"
 input_dim: 1
@@ -1441,49 +1441,15 @@ layer {
   bottom: "inception_4a/pool_proj_bn"
   top: "inception_4a/output"
 }
-#-----------------------layer +-------------------------
 layer {
-   name: "conv_fast_plane"
-   type: "Convolution"
-   bottom: "inception_4a/output"
-   top: "conv_fast"
-	param {
-		lr_mult: 1.0
-	}
-	param {
-		lr_mult: 2.0
-	}
-   convolution_param{
-	   num_output: 256
-	   kernel_size: 1
-	   pad: 0
-	   stride: 1
-	   weight_filler {
-		 type: "xavier"
-		 std: 0.01
-	   }
-	   bias_filler {
-		 type: "constant"
-		 value: 0
-	   }
-   }
-}
-
-layer {
-   name: "relu_conv_fast"
-   type: "ReLU"
-   bottom: "conv_fast"
-   top: "conv_fast"
-}
-layer {
-	bottom: "conv_fast"
+	bottom: "conv5_3"
 	bottom: "rois"
 	top: "pool5"
 	name: "roi_pool5"
 	type: "ROIPooling"
 	roi_pooling_param {
-		pooled_w: 6
-		pooled_h: 6
+		pooled_w: 7
+		pooled_h: 7
 		spatial_scale: 0.0625  # (1/16)
 	}
 }
@@ -1518,7 +1484,6 @@ layer {
 	type: "Dropout"
 	dropout_param {
 		dropout_ratio: 0.5
-		scale_train: false
 	}
 }
 
@@ -1552,7 +1517,6 @@ layer {
 	type: "Dropout"
 	dropout_param {
 		dropout_ratio: 0.5
-		scale_train: false
 	}
 }
 
@@ -1568,7 +1532,7 @@ layer {
 	}
 	type: "InnerProduct"
 	inner_product_param {
-		num_output: 7
+		num_output: 21
 		weight_filler {
 			type: "gaussian"
 			std: 0.01
@@ -1592,7 +1556,7 @@ layer {
 		lr_mult: 2.0
 	}
 	inner_product_param {
-		num_output: 28
+		num_output: 84
 		weight_filler {
 			type: "gaussian"
 			std: 0.001

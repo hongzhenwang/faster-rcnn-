@@ -1,4 +1,4 @@
-name: "lenet_4a"
+name: "VGG_ILSVRC_16"
 
 input: "data"
 input_dim: 1
@@ -19,11 +19,11 @@ layer {
   bottom: "data"
   top: "conv1/7x7_s2"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -46,11 +46,11 @@ layer {
   bottom: "conv1/7x7_s2"
   top: "conv1/7x7_s2_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -95,11 +95,11 @@ layer {
   bottom: "pool1/3x3_s2"
   top: "conv2/3x3_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -120,11 +120,11 @@ layer {
   bottom: "conv2/3x3_reduce"
   top: "conv2/3x3_reduce_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -158,11 +158,11 @@ layer {
   bottom: "conv2/3x3_reduce_bn"
   top: "conv2/3x3"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -184,11 +184,11 @@ layer {
   bottom: "conv2/3x3"
   top: "conv2/3x3_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -233,11 +233,11 @@ layer {
   bottom: "pool2/3x3_s2"
   top: "inception_3a/1x1"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -258,11 +258,11 @@ layer {
   bottom: "inception_3a/1x1"
   top: "inception_3a/1x1_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -296,11 +296,11 @@ layer {
   bottom: "pool2/3x3_s2"
   top: "inception_3a/3x3_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -321,11 +321,11 @@ layer {
   bottom: "inception_3a/3x3_reduce"
   top: "inception_3a/3x3_reduce_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -359,11 +359,11 @@ layer {
   bottom: "inception_3a/3x3_reduce_bn"
   top: "inception_3a/3x3"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -385,11 +385,11 @@ layer {
   bottom: "inception_3a/3x3"
   top: "inception_3a/3x3_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -423,11 +423,11 @@ layer {
   bottom: "pool2/3x3_s2"
   top: "inception_3a/5x5_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -448,11 +448,11 @@ layer {
   bottom: "inception_3a/5x5_reduce"
   top: "inception_3a/5x5_reduce_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -486,11 +486,11 @@ layer {
   bottom: "inception_3a/5x5_reduce_bn"
   top: "inception_3a/5x5"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -512,11 +512,11 @@ layer {
   bottom: "inception_3a/5x5"
   top: "inception_3a/5x5_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -562,11 +562,11 @@ layer {
   bottom: "inception_3a/pool"
   top: "inception_3a/pool_proj"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -587,11 +587,11 @@ layer {
   bottom: "inception_3a/pool_proj"
   top: "inception_3a/pool_proj_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -634,11 +634,11 @@ layer {
   bottom: "inception_3a/output"
   top: "inception_3b/1x1"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -659,11 +659,11 @@ layer {
   bottom: "inception_3b/1x1"
   top: "inception_3b/1x1_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -697,11 +697,11 @@ layer {
   bottom: "inception_3a/output"
   top: "inception_3b/3x3_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -722,11 +722,11 @@ layer {
   bottom: "inception_3b/3x3_reduce"
   top: "inception_3b/3x3_reduce_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -760,11 +760,11 @@ layer {
   bottom: "inception_3b/3x3_reduce_bn"
   top: "inception_3b/3x3"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -786,11 +786,11 @@ layer {
   bottom: "inception_3b/3x3"
   top: "inception_3b/3x3_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -824,11 +824,11 @@ layer {
   bottom: "inception_3a/output"
   top: "inception_3b/5x5_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -849,11 +849,11 @@ layer {
   bottom: "inception_3b/5x5_reduce"
   top: "inception_3b/5x5_reduce_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -887,11 +887,11 @@ layer {
   bottom: "inception_3b/5x5_reduce_bn"
   top: "inception_3b/5x5"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -913,11 +913,11 @@ layer {
   bottom: "inception_3b/5x5"
   top: "inception_3b/5x5_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -963,11 +963,11 @@ layer {
   bottom: "inception_3b/pool"
   top: "inception_3b/pool_proj"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -988,11 +988,11 @@ layer {
   bottom: "inception_3b/pool_proj"
   top: "inception_3b/pool_proj_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -1046,11 +1046,11 @@ layer {
   bottom: "pool3/3x3_s2"
   top: "inception_4a/1x1"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -1071,11 +1071,11 @@ layer {
   bottom: "inception_4a/1x1"
   top: "inception_4a/1x1_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -1109,11 +1109,11 @@ layer {
   bottom: "pool3/3x3_s2"
   top: "inception_4a/3x3_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -1134,11 +1134,11 @@ layer {
   bottom: "inception_4a/3x3_reduce"
   top: "inception_4a/3x3_reduce_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -1172,11 +1172,11 @@ layer {
   bottom: "inception_4a/3x3_reduce_bn"
   top: "inception_4a/3x3"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -1198,11 +1198,11 @@ layer {
   bottom: "inception_4a/3x3"
   top: "inception_4a/3x3_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -1236,11 +1236,11 @@ layer {
   bottom: "pool3/3x3_s2"
   top: "inception_4a/5x5_reduce"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -1261,11 +1261,11 @@ layer {
   bottom: "inception_4a/5x5_reduce"
   top: "inception_4a/5x5_reduce_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -1299,11 +1299,11 @@ layer {
   bottom: "inception_4a/5x5_reduce_bn"
   top: "inception_4a/5x5"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -1325,11 +1325,11 @@ layer {
   bottom: "inception_4a/5x5"
   top: "inception_4a/5x5_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -1375,11 +1375,11 @@ layer {
   bottom: "inception_4a/pool"
   top: "inception_4a/pool_proj"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 1
   }
   param {
-    lr_mult: 0
+    lr_mult: 2
     decay_mult: 0
   }
   convolution_param {
@@ -1400,11 +1400,11 @@ layer {
   bottom: "inception_4a/pool_proj"
   top: "inception_4a/pool_proj_bn"
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
-    lr_mult: 0
+    lr_mult: 1
     decay_mult: 0
   }
   param {
@@ -1441,49 +1441,16 @@ layer {
   bottom: "inception_4a/pool_proj_bn"
   top: "inception_4a/output"
 }
-#-----------------------layer +-------------------------
-layer {
-   name: "conv_fast_plane"
-   type: "Convolution"
-   bottom: "inception_4a/output"
-   top: "conv_fast"
-	param {
-		lr_mult: 1.0
-	}
-	param {
-		lr_mult: 2.0
-	}
-   convolution_param{
-	   num_output: 256
-	   kernel_size: 1
-	   pad: 0
-	   stride: 1
-	   weight_filler {
-		 type: "xavier"
-		 std: 0.01
-	   }
-	   bias_filler {
-		 type: "constant"
-		 value: 0
-	   }
-   }
-}
 
 layer {
-   name: "relu_conv_fast"
-   type: "ReLU"
-   bottom: "conv_fast"
-   top: "conv_fast"
-}
-layer {
-	bottom: "conv_fast"
+	bottom: "inception_4a/output"
 	bottom: "rois"
 	top: "pool5"
 	name: "roi_pool5"
 	type: "ROIPooling"
 	roi_pooling_param {
-		pooled_w: 6
-		pooled_h: 6
+		pooled_w: 7
+		pooled_h: 7
 		spatial_scale: 0.0625  # (1/16)
 	}
 }
@@ -1518,7 +1485,6 @@ layer {
 	type: "Dropout"
 	dropout_param {
 		dropout_ratio: 0.5
-		scale_train: false
 	}
 }
 
@@ -1552,7 +1518,6 @@ layer {
 	type: "Dropout"
 	dropout_param {
 		dropout_ratio: 0.5
-		scale_train: false
 	}
 }
 
@@ -1568,7 +1533,7 @@ layer {
 	}
 	type: "InnerProduct"
 	inner_product_param {
-		num_output: 7
+		num_output: 21
 		weight_filler {
 			type: "gaussian"
 			std: 0.01
@@ -1592,7 +1557,7 @@ layer {
 		lr_mult: 2.0
 	}
 	inner_product_param {
-		num_output: 28
+		num_output: 84
 		weight_filler {
 			type: "gaussian"
 			std: 0.001
