@@ -1,0 +1,64 @@
+conf:
+       batch_size: 128
+      bbox_thresh: 0.5000
+     bg_thresh_hi: 0.5000
+     bg_thresh_lo: 0.1000
+      fg_fraction: 0.2500
+        fg_thresh: 0.5000
+      image_means: [1x1x3 single]
+    ims_per_batch: 2
+         max_size: 1000
+         rng_seed: 6
+           scales: 600
+      test_binary: 0
+    test_max_size: 1000
+         test_nms: 0.3000
+      test_scales: 600
+      use_flipped: 1
+          use_gpu: 1
+
+opts:
+           cache_name: 'plane_lenetstage_ori'
+                 conf: [1x1 struct]
+               do_val: 1
+           imdb_train: {[1x1 struct]}
+             imdb_val: [1x1 struct]
+             net_file: '/home/whz/DNN/faster_rcnn-master/output/fast_rcnn_...'
+          roidb_train: {[1x1 struct]}
+            roidb_val: [1x1 struct]
+    snapshot_interval: 5000
+      solver_def_file: '/home/whz/DNN/faster_rcnn-master/models/ori_protot...'
+         val_interval: 2000
+            val_iters: 30
+
+Preparing training data...Done.
+Preparing validation data...Done.
+
+------------------------- Iteration 0 -------------------------
+Training : cls error 0.0547, orierror 0.875, loss (ori 2.15, reg 0.318)
+Testing  : cls error 0.0547, orierror 0.875, loss (ori 2.15, reg 0.318)
+Saved as /home/whz/DNN/faster_rcnn-master/output/ori_cachedir/plane_lenetstage_ori/plane_2015_trainval/iter_0
+
+------------------------- Iteration 2000 -------------------------
+Training : cls error 0.11, orierror 0.377, loss (ori 0.987, reg 0.227)
+Testing  : cls error 0.11, orierror 0.377, loss (ori 0.987, reg 0.227)
+
+------------------------- Iteration 4000 -------------------------
+Training : cls error 0.0947, orierror 0.143, loss (ori 0.376, reg 0.198)
+Testing  : cls error 0.0947, orierror 0.143, loss (ori 0.376, reg 0.198)
+Saved as /home/whz/DNN/faster_rcnn-master/output/ori_cachedir/plane_lenetstage_ori/plane_2015_trainval/iter_5000
+
+------------------------- Iteration 6000 -------------------------
+Training : cls error 0.0828, orierror 0.0596, loss (ori 0.162, reg 0.207)
+Testing  : cls error 0.0828, orierror 0.0596, loss (ori 0.162, reg 0.207)
+
+------------------------- Iteration 8000 -------------------------
+Training : cls error 0.0745, orierror 0.0186, loss (ori 0.0564, reg 0.156)
+Testing  : cls error 0.0745, orierror 0.0186, loss (ori 0.0564, reg 0.156)
+
+------------------------- Iteration 10000 -------------------------
+Training : cls error 0.0728, orierror 0.0145, loss (ori 0.0443, reg 0.149)
+Testing  : cls error 0.0728, orierror 0.0145, loss (ori 0.0443, reg 0.149)
+Saved as /home/whz/DNN/faster_rcnn-master/output/ori_cachedir/plane_lenetstage_ori/plane_2015_trainval/iter_10000
+Saved as /home/whz/DNN/faster_rcnn-master/output/ori_cachedir/plane_lenetstage_ori/plane_2015_trainval/iter_12000
+Saved as /home/whz/DNN/faster_rcnn-master/output/ori_cachedir/plane_lenetstage_ori/plane_2015_trainval/final

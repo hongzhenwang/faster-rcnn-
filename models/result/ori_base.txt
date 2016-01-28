@@ -1,0 +1,61 @@
+conf:
+       batch_size: 128
+      bbox_thresh: 0.5000
+     bg_thresh_hi: 0.5000
+     bg_thresh_lo: 0.1000
+      fg_fraction: 0.2500
+        fg_thresh: 0.5000
+      image_means: [224x224x3 single]
+    ims_per_batch: 2
+         max_size: 1000
+         rng_seed: 6
+           scales: 600
+      test_binary: 0
+    test_max_size: 1000
+         test_nms: 0.3000
+      test_scales: 600
+      use_flipped: 1
+          use_gpu: 1
+
+opts:
+           cache_name: 'faster_plane_ZF_ChangeAnchor_con3stage_ori'
+                 conf: [1x1 struct]
+               do_val: 1
+           imdb_train: {[1x1 struct]}
+             imdb_val: [1x1 struct]
+             net_file: '/home/whz/DNN/faster_rcnn-master/output/fast_rcnn_...'
+          roidb_train: {[1x1 struct]}
+            roidb_val: [1x1 struct]
+    snapshot_interval: 5000
+      solver_def_file: '/home/whz/DNN/faster_rcnn-master/models/ori_protot...'
+         val_interval: 2000
+            val_iters: 30
+
+Preparing training data...Done.
+Preparing validation data...Done.
+
+------------------------- Iteration 0 -------------------------
+Training : error 0.974, loss (ORI 2.64, reg Testing  : error 0.96, loss (ORI 2.29, reg Saved as /home/whz/DNN/faster_rcnn-master/output/ori_cachedir/faster_plane_ZF_ChangeAnchor_con3stage_ori/plane_2015_trainval/iter_0
+
+------------------------- Iteration 2000 -------------------------
+Training : error 0.211, loss (ORI 0.645, reg Testing  : error 0.176, loss (ORI 0.518, reg 
+------------------------- Iteration 4000 -------------------------
+Training : error 0.175, loss (ORI 0.516, reg Testing  : error 0.147, loss (ORI 0.445, reg Saved as /home/whz/DNN/faster_rcnn-master/output/ori_cachedir/faster_plane_ZF_ChangeAnchor_con3stage_ori/plane_2015_trainval/iter_5000
+
+------------------------- Iteration 6000 -------------------------
+Training : error 0.156, loss (ORI 0.454, reg Testing  : error 0.139, loss (ORI 0.412, reg 
+------------------------- Iteration 8000 -------------------------
+Training : error 0.149, loss (ORI 0.436, reg Testing  : error 0.14, loss (ORI 0.417, reg 
+------------------------- Iteration 10000 -------------------------
+Training : error 0.149, loss (ORI 0.431, reg Testing  : error 0.136, loss (ORI 0.401, reg Saved as /home/whz/DNN/faster_rcnn-master/output/ori_cachedir/faster_plane_ZF_ChangeAnchor_con3stage_ori/plane_2015_trainval/iter_10000
+
+------------------------- Iteration 12000 -------------------------
+Training : error 0.148, loss (ORI 0.427, reg Testing  : error 0.14, loss (ORI 0.41, reg 
+------------------------- Iteration 14000 -------------------------
+Training : error 0.147, loss (ORI 0.427, reg Testing  : error 0.14, loss (ORI 0.4, reg Saved as /home/whz/DNN/faster_rcnn-master/output/ori_cachedir/faster_plane_ZF_ChangeAnchor_con3stage_ori/plane_2015_trainval/iter_15000
+
+------------------------- Iteration 16000 -------------------------
+Training : error 0.147, loss (ORI 0.426, reg Testing  : error 0.146, loss (ORI 0.429, reg 
+------------------------- Iteration 18000 -------------------------
+Training : error 0.148, loss (ORI 0.427, reg Testing  : error 0.136, loss (ORI 0.403, reg Saved as /home/whz/DNN/faster_rcnn-master/output/ori_cachedir/faster_plane_ZF_ChangeAnchor_con3stage_ori/plane_2015_trainval/iter_20000
+Saved as /home/whz/DNN/faster_rcnn-master/output/ori_cachedir/faster_plane_ZF_ChangeAnchor_con3stage_ori/plane_2015_trainval/final

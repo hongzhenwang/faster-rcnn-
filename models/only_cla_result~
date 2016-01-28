@@ -1,0 +1,21 @@
+test all images in 99.943997 seconds.
+Cleared 0 solvers and 1 stand-alone nets
+!!! airfreighter : 0.8996 0.9509
+!!! fighter : 0.8834 0.9196
+!!! bomber : 0.8660 0.8945
+!!! AEM : 0.8431 0.8875
+!!! aerobus : 0.8885 0.9246
+!!! tanker : 0.8800 0.9216
+
+~~~~~~~~~~~~~~~~~~~~
+Results:
+   89.9601
+   88.3427
+   86.5999
+   84.3117
+   88.8536
+   87.9969
+
+   87.6775
+
+~~~~~~~~~~~~~~~~~~~~

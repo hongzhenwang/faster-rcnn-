@@ -1,0 +1,48 @@
+
+test all images in 39.073243 seconds.
+Cleared 0 solvers and 1 stand-alone nets
+!!! airfreighter : 0.9027 0.9663
+!!! fighter : 0.8855 0.9271
+!!! bomber : 0.8836 0.9052
+!!! AEM : 0.9069 0.9634
+!!! aerobus : 0.8953 0.9413
+!!! tanker : 0.9060 0.9579
+
+~~~~~~~~~~~~~~~~~~~~
+Results:
+   90.2664
+   88.5546
+   88.3580
+   90.6926
+   89.5323
+   90.6046
+
+   89.6681
+
+
+    0.0207
+    0.0139
+    0.0024
+    0.0007
+    0.0281
+    0.0016
+
+test all images in 89.925298 seconds.
+Cleared 0 solvers and 1 stand-alone nets
+!!! airfreighter : 0.9026 0.9599
+!!! fighter : 0.8824 0.9184
+!!! bomber : 0.8941 0.9552
+!!! AEM : 0.9850 0.9895
+!!! aerobus : 0.8787 0.9143
+!!! tanker : 0.8941 0.9484
+
+~~~~~~~~~~~~~~~~~~~~
+Results:
+   90.2642
+   88.2444
+   89.4085
+   98.4976
+   87.8704
+   89.4104
+
+   90.6159

@@ -30,7 +30,6 @@ input_dim: 28 # 4 * (K+1) (=21) classes
 input_dim: 1
 input_dim: 1
 
-
 layer {
   name: "conv1/7x7_s2"
   type: "Convolution"
@@ -996,6 +995,6 @@ layer {
 	bottom: "bbox_targets"
 	bottom: "bbox_loss_weights"
 	top: "loss_bbox"
-	loss_weight: 1
+	loss_weight: 0
 }
 

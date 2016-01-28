@@ -50,7 +50,13 @@ for i = 1:length(rois)
     rois(i).overlap = cat(1, rois(i).overlap, zeros(num_boxes, size(rois(i).overlap, 2)));
     rois(i).boxes = cat(1, rois(i).boxes, boxes);
     rois(i).class = cat(1, rois(i).class, zeros(num_boxes, 1));
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%         
     rois(i).ori_overlap = cat(1, zeros(num_boxes+num_gt_boxes, 8));
+     gt_ori = rois(i).ori(is_gt, :);
+     for p=1:length(gt_ori)
+         rois(i).ori_overlap(p,gt_ori(p))=1;
+     end
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if isfield(rois,'ori')
          rois(i).ori = cat(1, rois(i).ori, zeros(num_boxes, 1));
          gt_ori = rois(i).ori(is_gt, :);
